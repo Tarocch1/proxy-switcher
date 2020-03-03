@@ -1,8 +1,56 @@
 {
+  "controlled_by_other_extensions": {
+    "message": "其它插件控制了代理配置！"
+  },
   "add": {
     "message": "添加"
   },
-  "no_data": {
+  "no_proxy": {
     "message": "暂无代理"
+  },
+  "proxy_name": {
+    "message": "代理名称"
+  },
+  "proxy_mode": {
+    "message": "代理模式"
+  },
+  "manual": {
+    "message": "手动设置"
+  },
+  "direct": {
+    "message": "直接连接"
+  },
+  "system_proxy": {
+    "message": "系统代理"
+  },
+  "proxy_scheme": {
+    "message": "代理类型"
+  },
+  "proxy_host": {
+    "message": "代理地址"
+  },
+  "proxy_port": {
+    "message": "代理端口"
+  },
+  "bypass_list": {
+    "message": "忽略地址"
+  },
+  "delete": {
+    "message": "删除"
+  },
+  "delete_confirm": {
+    "message": "是否要删除该代理？"
+  },
+  "confirm": {
+    "message": "确定"
+  },
+  "cancel": {
+    "message": "取消"
+  },
+  "create": {
+    "message": "创建"
+  },
+  "save": {
+    "message": "保存"
   }
 }

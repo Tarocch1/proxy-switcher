@@ -22,8 +22,8 @@ export interface IProxyFormData {
   id: string;
   name: string;
   mode: ProxyMode;
-  scheme?: ProxyScheme;
-  host?: string;
-  port?: number;
-  bypassList?: string[];
+  scheme: ProxyScheme;
+  host: string;
+  port: number | null;
+  bypassList: string;
 }

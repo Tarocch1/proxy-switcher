@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Table, Button, Radio } from 'antd';
+import { Table, Button } from 'antd';
 import { ColumnProps } from 'antd/es/table';
 import { SettingOutlined } from '@ant-design/icons';
 import { useModel } from '@tarocch1/use-model';
@@ -11,36 +11,44 @@ function App() {
   const columns: ColumnProps<IProxyFormData>[] = [
     {
       dataIndex: 'name',
+      ellipsis: true,
     },
     {
       key: 'setting',
-      render: (record: IProxyFormData) => <SettingOutlined />,
-    },
-    {
-      key: 'Radio',
       render: (record: IProxyFormData) => (
-        <Radio checked={record.id === _mainModel.currentProxy} onClick={() => _mainModel.setCurrentProxy(record.id)} />
+        <SettingOutlined style={{ cursor: 'pointer' }} onClick={() => edit(record)} />
       ),
+      width: 40,
     },
   ];
+  const edit = (data: IProxyFormData) => {
+    _mainModel.setEdittingProxy(data);
+    _mainModel.setShowMode('edit');
+  };
   useEffect(() => {
     _mainModel.getProxyList();
+    _mainModel.getCurrentProxy();
   }, []);
   return (
     <Table
-      size="small"
+      size="middle"
       columns={columns}
       dataSource={_mainModel.proxyList}
       rowKey="id"
       showHeader={false}
       pagination={false}
+      rowSelection={{
+        type: 'radio',
+        selectedRowKeys: [_mainModel.currentProxy],
+        onChange: data => _mainModel.setCurrentProxy(data[0] as string),
+      }}
       footer={() => (
         <Button type="link" onClick={() => _mainModel.setShowMode('edit')}>
           {chrome.i18n.getMessage('add')}
         </Button>
       )}
       locale={{
-        emptyText: chrome.i18n.getMessage('no_data'),
+        emptyText: <div style={{ textAlign: 'center' }}>{chrome.i18n.getMessage('no_proxy')}</div>,
       }}
     />
   );
