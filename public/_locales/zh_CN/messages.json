@@ -39,7 +39,7 @@
     "message": "删除"
   },
   "delete_confirm": {
-    "message": "是否要删除该代理？"
+    "message": "是否要删除此配置？"
   },
   "confirm": {
     "message": "确定"
