@@ -1,3 +1,3 @@
 # ProxySwitcher
 
-A proxy switcher for chrome.
+A proxy switcher.
