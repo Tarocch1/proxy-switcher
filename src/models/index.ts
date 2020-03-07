@@ -1,3 +1,3 @@
-import mainModel from './mainModel';
+import MainModel from './MainModel';
 
-export { mainModel };
+export { MainModel };

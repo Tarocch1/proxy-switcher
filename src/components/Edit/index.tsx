@@ -2,25 +2,25 @@ import React, { useState } from 'react';
 import { Row, Col, Form, Radio, Select, Input, InputNumber, Button, Popconfirm } from 'antd';
 import { v4 as uuidv4 } from 'uuid';
 import { useModel } from '@tarocch1/use-model';
-import { mainModel } from '../../models';
+import { MainModel } from '../../models';
 import { ProxyMode } from '../../types';
 import { DEFAULT_PROXY_CONFIG } from '../../utils/constants';
 
 function Edit() {
-  const _mainModel = useModel(mainModel);
-  const [proxyMode, setProxyMode] = useState<ProxyMode>(_mainModel.edittingProxy.mode);
+  const mainModel = useModel(MainModel);
+  const [proxyMode, setProxyMode] = useState<ProxyMode>(mainModel.edittingProxy.mode);
   const [form] = Form.useForm();
   const onValuesChange = (changedValues: any) => {
     if (changedValues.mode) setProxyMode(changedValues.mode);
   };
   const onDelete = () => {
-    _mainModel.deleteProxy(_mainModel.edittingProxy.id);
-    _mainModel.resetEdittingProxy();
-    _mainModel.setShowMode('list');
+    mainModel.deleteProxy(mainModel.edittingProxy.id);
+    mainModel.resetEdittingProxy();
+    mainModel.setShowMode('list');
   };
   const onCancel = () => {
-    _mainModel.resetEdittingProxy();
-    _mainModel.setShowMode('list');
+    mainModel.resetEdittingProxy();
+    mainModel.setShowMode('list');
   };
   const onFinish = () => {
     const values = form.getFieldsValue();
@@ -46,13 +46,13 @@ function Edit() {
       default:
         break;
     }
-    data.id = _mainModel.edittingProxy.id || uuidv4();
-    if (_mainModel.edittingProxy.id) {
-      _mainModel.editProxy(data);
+    data.id = mainModel.edittingProxy.id || uuidv4();
+    if (mainModel.edittingProxy.id) {
+      mainModel.editProxy(data);
     } else {
-      _mainModel.createProxy(data);
+      mainModel.createProxy(data);
     }
-    _mainModel.setShowMode('list');
+    mainModel.setShowMode('list');
   };
   return (
     <Form
@@ -60,7 +60,7 @@ function Edit() {
       style={{ padding: 16 }}
       form={form}
       layout="vertical"
-      initialValues={_mainModel.edittingProxy}
+      initialValues={mainModel.edittingProxy}
       onValuesChange={onValuesChange}
       onFinish={onFinish}
     >
@@ -102,7 +102,7 @@ function Edit() {
       <Form.Item>
         <Row justify="space-between">
           <Col>
-            {_mainModel.edittingProxy.id !== '' && (
+            {mainModel.edittingProxy.id !== '' && (
               <Popconfirm
                 arrowPointAtCenter
                 placement="topLeft"
@@ -122,7 +122,7 @@ function Edit() {
               {chrome.i18n.getMessage('cancel')}
             </Button>
             <Button type="primary" htmlType="submit">
-              {chrome.i18n.getMessage(_mainModel.edittingProxy.id !== '' ? 'save' : 'create')}
+              {chrome.i18n.getMessage(mainModel.edittingProxy.id !== '' ? 'save' : 'create')}
             </Button>
           </Col>
         </Row>

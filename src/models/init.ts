@@ -1,4 +1,4 @@
 import { setModel } from '@tarocch1/use-model';
-import { mainModel } from './';
+import { MainModel } from './';
 
-setModel(mainModel);
+setModel(MainModel);

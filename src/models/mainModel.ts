@@ -21,27 +21,27 @@ class MainModel {
     ...DEFAULT_PROXY_CONFIG,
   };
 
-  getControllableByThisExtension = async () => {
+  async getControllableByThisExtension() {
     const proxySetting = await proxyGetSync({});
     this.controllableByThisExtension = proxySetting.levelOfControl.includes('this_extension');
     this.init = true;
   };
 
-  setShowMode = (payload: ShowMode) => {
+  setShowMode(payload: ShowMode) {
     this.showMode = payload;
   };
 
-  getProxyList = async () => {
+  async getProxyList() {
     const data = await storageGetSync(['proxyList']);
     if (data.proxyList) this.proxyList = data.proxyList;
   };
 
-  getCurrentProxy = async () => {
+  async getCurrentProxy() {
     const data = await storageGetSync(['currentProxy']);
     if (data.currentProxy) this.currentProxy = data.currentProxy;
   };
 
-  setCurrentProxy = async (payload: string) => {
+  async setCurrentProxy(payload: string) {
     await storageSetSync({ currentProxy: payload });
     const formData = this.proxyList.find(proxy => proxy.id === payload);
     const proxyConfig = formDataToConfig(formData!);
@@ -52,11 +52,11 @@ class MainModel {
     this.currentProxy = payload;
   };
 
-  setEdittingProxy = (payload: IProxyFormData) => {
+  setEdittingProxy(payload: IProxyFormData) {
     this.edittingProxy = payload;
   };
 
-  resetEdittingProxy = () => {
+  resetEdittingProxy() {
     this.edittingProxy = {
       id: '',
       name: '',
@@ -65,7 +65,7 @@ class MainModel {
     };
   };
 
-  createProxy = (data: IProxyFormData) => {
+  createProxy(data: IProxyFormData) {
     const list = [...this.proxyList];
     list.push(data);
     storageSetSync({
@@ -74,7 +74,7 @@ class MainModel {
     this.proxyList = list;
   };
 
-  editProxy = (data: IProxyFormData) => {
+  editProxy(data: IProxyFormData) {
     const list = [...this.proxyList];
     const index = list.findIndex(proxy => proxy.id === data.id);
     list[index] = data;
@@ -87,7 +87,7 @@ class MainModel {
     }
   };
 
-  deleteProxy = (id: string) => {
+  deleteProxy(id: string) {
     const list = [...this.proxyList];
     const index = list.findIndex(proxy => proxy.id === id);
     list.splice(index, 1);
@@ -107,4 +107,4 @@ class MainModel {
   };
 }
 
-export default new MainModel();
+export default MainModel;

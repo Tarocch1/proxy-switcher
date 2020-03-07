@@ -3,11 +3,11 @@ import { Table, Button } from 'antd';
 import { ColumnProps } from 'antd/es/table';
 import { SettingOutlined } from '@ant-design/icons';
 import { useModel } from '@tarocch1/use-model';
-import { mainModel } from '../../models';
+import { MainModel } from '../../models';
 import { IProxyFormData } from '../../types';
 
 function App() {
-  const _mainModel = useModel(mainModel);
+  const mainModel = useModel(MainModel);
   const columns: ColumnProps<IProxyFormData>[] = [
     {
       dataIndex: 'name',
@@ -22,28 +22,28 @@ function App() {
     },
   ];
   const edit = (data: IProxyFormData) => {
-    _mainModel.setEdittingProxy(data);
-    _mainModel.setShowMode('edit');
+    mainModel.setEdittingProxy(data);
+    mainModel.setShowMode('edit');
   };
   useEffect(() => {
-    _mainModel.getProxyList();
-    _mainModel.getCurrentProxy();
+    mainModel.getProxyList();
+    mainModel.getCurrentProxy();
   }, []);
   return (
     <Table
       size="middle"
       columns={columns}
-      dataSource={_mainModel.proxyList}
+      dataSource={mainModel.proxyList}
       rowKey="id"
       showHeader={false}
       pagination={false}
       rowSelection={{
         type: 'radio',
-        selectedRowKeys: [_mainModel.currentProxy],
-        onChange: data => _mainModel.setCurrentProxy(data[0] as string),
+        selectedRowKeys: [mainModel.currentProxy],
+        onChange: data => mainModel.setCurrentProxy(data[0] as string),
       }}
       footer={() => (
-        <Button type="link" onClick={() => _mainModel.setShowMode('edit')}>
+        <Button type="link" onClick={() => mainModel.setShowMode('edit')}>
           {chrome.i18n.getMessage('add')}
         </Button>
       )}
