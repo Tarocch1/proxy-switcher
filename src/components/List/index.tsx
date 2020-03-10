@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Table, Button } from 'antd';
 import { ColumnProps } from 'antd/es/table';
-import { SettingOutlined } from '@ant-design/icons';
+import { SettingOutlined, MenuOutlined } from '@ant-design/icons';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import { useModel } from '@tarocch1/use-model';
@@ -10,8 +10,8 @@ import { IProxyFormData } from '../../types';
 
 const type = 'DragbleBodyRow';
 
-const DragableBodyRow = ({ index, moveRow, className, style, ...restProps }: any) => {
-  const ref = React.useRef();
+const DragableBodyRow = ({ index, moveRow, className, ...restProps }: any) => {
+  const ref = useRef();
   const [{ isOver, dropClassName }, drop] = useDrop({
     accept: type,
     collect: monitor => {
@@ -36,14 +36,24 @@ const DragableBodyRow = ({ index, moveRow, className, style, ...restProps }: any
     }),
   });
   drop(drag(ref));
-  return (
-    <tr
-      ref={ref}
-      className={`${className}${isOver ? dropClassName : ''}`}
-      style={{ cursor: 'move', ...style }}
-      {...restProps}
-    />
-  );
+  return <tr ref={ref} className={`${className}${isOver ? dropClassName : ''}`} {...restProps} />;
+};
+
+const DragableBodyCell = ({ className, ...restProps }: any) => {
+  const ref = useRef<HTMLTableDataCellElement>();
+  const stopDrag: EventListener = e => {
+    e.stopImmediatePropagation();
+    e.preventDefault();
+  };
+  useEffect(() => {
+    if (!className.includes('dragable-table-cell')) {
+      ref.current?.addEventListener('dragstart', stopDrag);
+      return () => {
+        ref.current?.removeEventListener('dragstart', stopDrag);
+      };
+    }
+  }, []);
+  return <td ref={ref} className={className} draggable={true} {...restProps} />;
 };
 
 function List() {
@@ -58,7 +68,13 @@ function List() {
       render: (record: IProxyFormData) => (
         <SettingOutlined style={{ cursor: 'pointer' }} onClick={() => edit(record)} />
       ),
-      width: 40,
+      width: 30,
+    },
+    {
+      key: 'drag',
+      className: 'dragable-table-cell',
+      render: () => <MenuOutlined />,
+      width: 30,
     },
   ];
   const edit = (data: IProxyFormData) => {
@@ -91,6 +107,7 @@ function List() {
         components={{
           body: {
             row: DragableBodyRow,
+            cell: DragableBodyCell,
           },
         }}
         onRow={(record, index) =>

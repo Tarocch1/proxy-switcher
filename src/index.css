@@ -37,6 +37,10 @@ body {
   border-top: 2px solid #1890ff;
 }
 
+#list td.dragable-table-cell {
+  cursor: ns-resize;
+}
+
 #list .ant-table-content,
 #list .ant-table-body {
   overflow-y: auto;
