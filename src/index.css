@@ -16,3 +16,7 @@ body {
 #edit-form .ant-form-item-label {
   padding-bottom: 0;
 }
+
+#edit-form .ant-form-item-explain {
+  display: none;
+}

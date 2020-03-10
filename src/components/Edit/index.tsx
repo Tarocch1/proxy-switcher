@@ -22,13 +22,7 @@ function Edit() {
     mainModel.resetEdittingProxy();
     mainModel.setShowMode('list');
   };
-  const onFinish = () => {
-    const values = form.getFieldsValue();
-    if (!values.name) return;
-    if (values.mode === 'fixed_servers') {
-      if (!values.host) return;
-      if (!values.port) return;
-    }
+  const onFinish = (values: any) => {
     let data: any;
     switch (values.mode) {
       case 'system':
@@ -63,8 +57,9 @@ function Edit() {
       initialValues={mainModel.edittingProxy}
       onValuesChange={onValuesChange}
       onFinish={onFinish}
+      hideRequiredMark
     >
-      <Form.Item label={chrome.i18n.getMessage('proxy_name')} name="name">
+      <Form.Item label={chrome.i18n.getMessage('proxy_name')} name="name" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
       <Form.Item label={chrome.i18n.getMessage('proxy_mode')} name="mode">
@@ -76,7 +71,7 @@ function Edit() {
       </Form.Item>
       {proxyMode === 'fixed_servers' && (
         <React.Fragment>
-          <Form.Item label={chrome.i18n.getMessage('proxy_scheme')} name="scheme">
+          <Form.Item label={chrome.i18n.getMessage('proxy_scheme')} name="scheme" rules={[{ required: true }]}>
             <Select>
               <Select.Option value="http">HTTP</Select.Option>
               <Select.Option value="https">HTTPS</Select.Option>
@@ -84,10 +79,10 @@ function Edit() {
               <Select.Option value="socks5">Socks5</Select.Option>
             </Select>
           </Form.Item>
-          <Form.Item label={chrome.i18n.getMessage('proxy_host')} name="host">
+          <Form.Item label={chrome.i18n.getMessage('proxy_host')} name="host" rules={[{ required: true }]}>
             <Input placeholder="e.g. 127.0.0.1" />
           </Form.Item>
-          <Form.Item label={chrome.i18n.getMessage('proxy_port')} name="port">
+          <Form.Item label={chrome.i18n.getMessage('proxy_port')} name="port" rules={[{ required: true }]}>
             <InputNumber style={{ width: '100%' }} placeholder="e.g. 8080" min={1} max={65535} />
           </Form.Item>
           <Form.Item label={chrome.i18n.getMessage('bypass_list')} name="bypassList">

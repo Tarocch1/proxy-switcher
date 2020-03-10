@@ -14,7 +14,7 @@ jobs:
         uses: actions/checkout@master
       - id: setup_nodejs
         name: Setup node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@master
         with:
           node-version: 12
       - id: npm_ci
