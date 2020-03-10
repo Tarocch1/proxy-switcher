@@ -46,3 +46,7 @@ body {
   overflow-y: auto;
   max-height: 540px;
 }
+
+#list .ant-table-footer {
+  text-align: center;
+}

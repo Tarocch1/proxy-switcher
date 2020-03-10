@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Table, Button } from 'antd';
+import { Table, Button, Checkbox } from 'antd';
 import { ColumnProps } from 'antd/es/table';
 import { SettingOutlined, MenuOutlined } from '@ant-design/icons';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
@@ -60,11 +60,20 @@ function List() {
   const mainModel = useModel(MainModel);
   const columns: ColumnProps<IProxyFormData>[] = [
     {
+      key: 'checkbox',
+      align: 'right',
+      render: (record: IProxyFormData) => (
+        <Checkbox checked={record.id === mainModel.currentProxy} onClick={() => mainModel.setCurrentProxy(record.id)} />
+      ),
+      width: 40,
+    },
+    {
       dataIndex: 'name',
       ellipsis: true,
     },
     {
       key: 'setting',
+      align: 'center',
       render: (record: IProxyFormData) => (
         <SettingOutlined style={{ cursor: 'pointer' }} onClick={() => edit(record)} />
       ),
@@ -72,9 +81,10 @@ function List() {
     },
     {
       key: 'drag',
+      align: 'left',
       className: 'dragable-table-cell',
       render: () => <MenuOutlined />,
-      width: 30,
+      width: 38,
     },
   ];
   const edit = (data: IProxyFormData) => {
@@ -119,11 +129,6 @@ function List() {
         rowKey="id"
         showHeader={false}
         pagination={false}
-        rowSelection={{
-          type: 'radio',
-          selectedRowKeys: [mainModel.currentProxy],
-          onChange: data => mainModel.setCurrentProxy(data[0] as string),
-        }}
         footer={() => (
           <Button type="link" onClick={() => mainModel.setShowMode('edit')}>
             {chrome.i18n.getMessage('add')}
