@@ -25,21 +25,28 @@ class MainModel {
     const proxySetting = await proxyGetSync({});
     this.controllableByThisExtension = proxySetting.levelOfControl.includes('this_extension');
     this.init = true;
-  };
+  }
 
   setShowMode(payload: ShowMode) {
     this.showMode = payload;
-  };
+  }
+
+  async setProxyList(payload: IProxyFormData[]) {
+    await storageSetSync({
+      proxyList: payload,
+    });
+    this.proxyList = payload;
+  }
 
   async getProxyList() {
     const data = await storageGetSync(['proxyList']);
     if (data.proxyList) this.proxyList = data.proxyList;
-  };
+  }
 
   async getCurrentProxy() {
     const data = await storageGetSync(['currentProxy']);
     if (data.currentProxy) this.currentProxy = data.currentProxy;
-  };
+  }
 
   async setCurrentProxy(payload: string) {
     await storageSetSync({ currentProxy: payload });
@@ -50,11 +57,11 @@ class MainModel {
       value: proxyConfig,
     });
     this.currentProxy = payload;
-  };
+  }
 
   setEdittingProxy(payload: IProxyFormData) {
     this.edittingProxy = payload;
-  };
+  }
 
   resetEdittingProxy() {
     this.edittingProxy = {
@@ -63,48 +70,48 @@ class MainModel {
       mode: 'fixed_servers',
       ...DEFAULT_PROXY_CONFIG,
     };
-  };
+  }
 
-  createProxy(data: IProxyFormData) {
+  async createProxy(data: IProxyFormData) {
     const list = [...this.proxyList];
     list.push(data);
-    storageSetSync({
+    await storageSetSync({
       proxyList: list,
     });
     this.proxyList = list;
-  };
+  }
 
-  editProxy(data: IProxyFormData) {
+  async editProxy(data: IProxyFormData) {
     const list = [...this.proxyList];
     const index = list.findIndex(proxy => proxy.id === data.id);
     list[index] = data;
-    storageSetSync({
+    await storageSetSync({
       proxyList: list,
     });
     this.proxyList = list;
     if (this.currentProxy === data.id) {
       this.setCurrentProxy(data.id);
     }
-  };
+  }
 
-  deleteProxy(id: string) {
+  async deleteProxy(id: string) {
     const list = [...this.proxyList];
     const index = list.findIndex(proxy => proxy.id === id);
     list.splice(index, 1);
-    storageSetSync({
+    await storageSetSync({
       proxyList: list,
     });
     if (this.currentProxy === id) {
-      storageSetSync({
+      await storageSetSync({
         currentProxy: '',
       });
-      proxyClearSync({
+      await proxyClearSync({
         scope: 'regular',
       });
       this.currentProxy = '';
     }
     this.proxyList = list;
-  };
+  }
 }
 
 export default MainModel;
