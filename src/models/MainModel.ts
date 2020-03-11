@@ -102,13 +102,7 @@ class MainModel {
       proxyList: list,
     });
     if (this.currentProxy === id) {
-      await storageSetSync({
-        currentProxy: '',
-      });
-      await proxyClearSync({
-        scope: 'regular',
-      });
-      this.currentProxy = '';
+      this.clearProxy();
     }
     this.proxyList = list;
   }
