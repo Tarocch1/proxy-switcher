@@ -112,6 +112,16 @@ class MainModel {
     }
     this.proxyList = list;
   }
+
+  async clearProxy() {
+    await storageSetSync({
+      currentProxy: '',
+    });
+    await proxyClearSync({
+      scope: 'regular',
+    });
+    this.currentProxy = '';
+  }
 }
 
 export default MainModel;

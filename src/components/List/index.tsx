@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Table, Button, Checkbox } from 'antd';
 import { ColumnProps } from 'antd/es/table';
+import { CheckboxChangeEvent } from 'antd/es/checkbox';
 import { SettingOutlined, MenuOutlined } from '@ant-design/icons';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
@@ -63,7 +64,7 @@ function List() {
       key: 'checkbox',
       align: 'right',
       render: (record: IProxyFormData) => (
-        <Checkbox checked={record.id === mainModel.currentProxy} onClick={() => mainModel.setCurrentProxy(record.id)} />
+        <Checkbox checked={record.id === mainModel.currentProxy} onChange={e => onCheckboxChange(e, record.id)} />
       ),
       width: 40,
     },
@@ -102,6 +103,13 @@ function List() {
       }
     }
     mainModel.setProxyList(newList);
+  };
+  const onCheckboxChange = (e: CheckboxChangeEvent, id: string) => {
+    if (e.target.checked) {
+      mainModel.setCurrentProxy(id);
+    } else {
+      mainModel.clearProxy();
+    }
   };
   useEffect(() => {
     mainModel.getProxyList();
