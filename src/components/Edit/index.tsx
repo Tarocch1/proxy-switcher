@@ -66,11 +66,25 @@ function Edit() {
               <Select.Option value="socks5">Socks5</Select.Option>
             </Select>
           </Form.Item>
-          <Form.Item label={chrome.i18n.getMessage('proxy_host')} name="host" rules={[{ required: true }]}>
-            <Input placeholder="e.g. 127.0.0.1" />
-          </Form.Item>
-          <Form.Item label={chrome.i18n.getMessage('proxy_port')} name="port" rules={[{ required: true }]}>
-            <InputNumber style={{ width: '100%' }} placeholder="e.g. 8080" min={1} max={65535} />
+          <Form.Item>
+            <Input.Group compact>
+              <Form.Item
+                style={{ marginTop: 0, width: '66.7%' }}
+                name="host"
+                label={chrome.i18n.getMessage('proxy_host')}
+                rules={[{ required: true }]}
+              >
+                <Input placeholder="e.g. 127.0.0.1" />
+              </Form.Item>
+              <Form.Item
+                style={{ marginTop: 0, width: '33.3%' }}
+                name="port"
+                label={chrome.i18n.getMessage('proxy_port')}
+                rules={[{ required: true }]}
+              >
+                <InputNumber style={{ width: '100%' }} placeholder="e.g. 8080" min={1} max={65535} />
+              </Form.Item>
+            </Input.Group>
           </Form.Item>
           <Form.Item label={chrome.i18n.getMessage('bypass_list')} name="bypassList">
             <Input.TextArea

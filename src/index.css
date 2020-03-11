@@ -44,7 +44,7 @@ body {
 #list .ant-table-content,
 #list .ant-table-body {
   overflow-y: auto;
-  max-height: 540px;
+  max-height: 500px;
 }
 
 #list .ant-table-footer {

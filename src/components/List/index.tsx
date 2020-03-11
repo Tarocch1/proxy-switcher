@@ -64,7 +64,11 @@ function List() {
       key: 'checkbox',
       align: 'right',
       render: (record: IProxyFormData) => (
-        <Checkbox checked={record.id === mainModel.currentProxy} onChange={e => onCheckboxChange(e, record.id)} />
+        <Checkbox
+          checked={record.id === mainModel.currentProxy}
+          onChange={e => onCheckboxChange(e, record.id)}
+          disabled={!mainModel.controllableByThisExtension}
+        />
       ),
       width: 40,
     },

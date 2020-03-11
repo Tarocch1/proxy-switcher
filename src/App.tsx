@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Result } from 'antd';
+import { Alert } from 'antd';
 import { useModel } from '@tarocch1/use-model';
 import { MainModel } from './models';
 import List from './components/List';
@@ -13,10 +13,10 @@ function App() {
   return mainModel.init ? (
     <React.Fragment>
       {!mainModel.controllableByThisExtension && (
-        <Result status="warning" subTitle={chrome.i18n.getMessage('controlled_by_other_extensions')} />
+        <Alert message={chrome.i18n.getMessage('controlled_by_other_extensions')} banner showIcon={false} />
       )}
-      {mainModel.controllableByThisExtension && mainModel.showMode === 'list' && <List />}
-      {mainModel.controllableByThisExtension && mainModel.showMode === 'edit' && <Edit />}
+      {mainModel.showMode === 'list' && <List />}
+      {mainModel.showMode === 'edit' && <Edit />}
     </React.Fragment>
   ) : (
     <React.Fragment />
