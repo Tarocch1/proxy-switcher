@@ -3,8 +3,8 @@ import { Row, Col, Form, Radio, Select, Input, InputNumber, Button, Popconfirm }
 import { v4 as uuidv4 } from 'uuid';
 import { useModel } from '@tarocch1/use-model';
 import { MainModel } from '../../models';
-import { ProxyMode } from '../../types';
-import { DEFAULT_PROXY_CONFIG } from '../../utils/constants';
+import { ProxyMode, IProxyFormData } from '../../types';
+import { DEFAULT_PROXY_FORMDATA } from '../../utils/constants';
 
 function Edit() {
   const mainModel = useModel(MainModel);
@@ -23,23 +23,10 @@ function Edit() {
     mainModel.setShowMode('list');
   };
   const onFinish = (values: any) => {
-    let data: any;
-    switch (values.mode) {
-      case 'system':
-      case 'direct':
-        data = {
-          ...values,
-          ...DEFAULT_PROXY_CONFIG,
-        };
-        break;
-      case 'fixed_servers':
-        data = {
-          ...values,
-        };
-        break;
-      default:
-        break;
-    }
+    const data: IProxyFormData = {
+      ...DEFAULT_PROXY_FORMDATA,
+      ...values,
+    };
     data.id = mainModel.edittingProxy.id || uuidv4();
     if (mainModel.edittingProxy.id) {
       mainModel.editProxy(data);

@@ -1,11 +1,9 @@
-import { ProxyScheme } from '../types';
+import { IProxyFormData } from '../types';
 
-export const DEFAULT_PROXY_CONFIG: {
-  scheme: ProxyScheme;
-  host: string;
-  port: number | null;
-  bypassList: string;
-} = {
+export const DEFAULT_PROXY_FORMDATA: IProxyFormData = {
+  id: '',
+  name: '',
+  mode: 'fixed_servers',
   scheme: 'http',
   host: '',
   port: null,

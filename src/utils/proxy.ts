@@ -1,25 +1,25 @@
-import { IProxyConfig, IProxyFormData } from '../types';
+import { IProxyFormData } from '../types';
 
-export function proxyGetSync(details: { incognito?: boolean }) {
-  return new Promise<{ [key: string]: any }>(resolve => {
+export function proxyGetSync(details: chrome.types.ChromeSettingGetDetails) {
+  return new Promise<chrome.types.ChromeSettingGetResultDetails>(resolve => {
     chrome.proxy.settings.get(details, resolve);
   });
 }
 
-export function proxySetSync(details: { value: IProxyConfig; scope?: string }) {
+export function proxySetSync(details: chrome.types.ChromeSettingSetDetails) {
   return new Promise<void>(resolve => {
     chrome.proxy.settings.set(details, resolve);
   });
 }
 
-export function proxyClearSync(details: { scope?: string }) {
+export function proxyClearSync(details: chrome.types.ChromeSettingClearDetails) {
   return new Promise<void>(resolve => {
     chrome.proxy.settings.clear(details, resolve);
   });
 }
 
-export function formDataToConfig(data: IProxyFormData): IProxyConfig {
-  let proxyConfig: IProxyConfig = {
+export function formDataToConfig(data: IProxyFormData): chrome.proxy.ProxyConfig {
+  let proxyConfig: chrome.proxy.ProxyConfig = {
     mode: 'system',
   };
   switch (data.mode) {

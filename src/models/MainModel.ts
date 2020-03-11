@@ -1,7 +1,7 @@
 import { ShowMode, IProxyFormData } from '../types';
 import { storageGetSync, storageSetSync } from '../utils/storage';
 import { proxyGetSync, proxySetSync, proxyClearSync, formDataToConfig } from '../utils/proxy';
-import { DEFAULT_PROXY_CONFIG } from '../utils/constants';
+import { DEFAULT_PROXY_FORMDATA } from '../utils/constants';
 
 class MainModel {
   init: boolean = false;
@@ -14,12 +14,7 @@ class MainModel {
 
   currentProxy: string = '';
 
-  edittingProxy: IProxyFormData = {
-    id: '',
-    name: '',
-    mode: 'fixed_servers',
-    ...DEFAULT_PROXY_CONFIG,
-  };
+  edittingProxy: IProxyFormData = DEFAULT_PROXY_FORMDATA;
 
   async getControllableByThisExtension() {
     const proxySetting = await proxyGetSync({});
@@ -64,12 +59,7 @@ class MainModel {
   }
 
   resetEdittingProxy() {
-    this.edittingProxy = {
-      id: '',
-      name: '',
-      mode: 'fixed_servers',
-      ...DEFAULT_PROXY_CONFIG,
-    };
+    this.edittingProxy = DEFAULT_PROXY_FORMDATA;
   }
 
   async createProxy(data: IProxyFormData) {
