@@ -29,6 +29,15 @@ body {
   display: none;
 }
 
+#edit-form #mode.ant-radio-group {
+  width: 100%;
+}
+
+#edit-form #mode.ant-radio-group .ant-radio-button-wrapper {
+  width: 33.3%;
+  text-align: center;
+}
+
 #list tr.drop-over-downward td {
   border-bottom: 2px solid #1890ff;
 }

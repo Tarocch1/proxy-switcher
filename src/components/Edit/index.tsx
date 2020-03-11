@@ -50,16 +50,10 @@ function Edit() {
         <Input />
       </Form.Item>
       <Form.Item label={chrome.i18n.getMessage('proxy_mode')} name="mode">
-        <Radio.Group style={{ width: '100%' }} buttonStyle="solid">
-          <Radio.Button style={{ width: '33.3%', textAlign: 'center' }} value="fixed_servers">
-            {chrome.i18n.getMessage('manual')}
-          </Radio.Button>
-          <Radio.Button style={{ width: '33.3%', textAlign: 'center' }} value="pac_script">
-            {chrome.i18n.getMessage('auto')}
-          </Radio.Button>
-          <Radio.Button style={{ width: '33.3%', textAlign: 'center' }} value="direct">
-            {chrome.i18n.getMessage('direct')}
-          </Radio.Button>
+        <Radio.Group buttonStyle="solid">
+          <Radio.Button value="fixed_servers">{chrome.i18n.getMessage('manual')}</Radio.Button>
+          <Radio.Button value="pac_script">{chrome.i18n.getMessage('auto')}</Radio.Button>
+          <Radio.Button value="direct">{chrome.i18n.getMessage('direct')}</Radio.Button>
         </Radio.Group>
       </Form.Item>
       {proxyMode === 'fixed_servers' && (
