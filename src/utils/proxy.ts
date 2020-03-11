@@ -30,6 +30,9 @@ export function formDataToConfig(data: IProxyFormData): chrome.proxy.ProxyConfig
       };
       break;
     case 'fixed_servers':
+      let bypassList = data.bypassList;
+      bypassList = bypassList.replace(/\r/g, '\n');
+      bypassList = bypassList.replace(/\n+/g, '\n');
       proxyConfig = {
         mode: 'fixed_servers',
         rules: {
@@ -38,7 +41,7 @@ export function formDataToConfig(data: IProxyFormData): chrome.proxy.ProxyConfig
             host: data.host,
             port: data.port!,
           },
-          bypassList: data.bypassList.split(','),
+          bypassList: bypassList.split('\n'),
         },
       };
       break;

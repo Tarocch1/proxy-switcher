@@ -35,6 +35,9 @@
   "bypass_list": {
     "message": "忽略地址"
   },
+  "bypass_list_extra": {
+    "message": "每行输入一个地址。"
+  },
   "delete": {
     "message": "删除"
   },

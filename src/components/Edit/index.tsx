@@ -69,24 +69,33 @@ function Edit() {
           <Form.Item>
             <Input.Group compact>
               <Form.Item
-                style={{ marginTop: 0, width: '66.7%' }}
+                style={{ marginTop: 0, marginBottom: 0, width: '66.7%' }}
                 name="host"
                 label={chrome.i18n.getMessage('proxy_host')}
                 rules={[{ required: true }]}
               >
-                <Input placeholder="e.g. 127.0.0.1" />
+                <Input style={{ borderTopRightRadius: 0, borderBottomRightRadius: 0 }} placeholder="e.g. 127.0.0.1" />
               </Form.Item>
               <Form.Item
-                style={{ marginTop: 0, width: '33.3%' }}
+                style={{ marginTop: 0, marginBottom: 0, width: '33.3%' }}
                 name="port"
                 label={chrome.i18n.getMessage('proxy_port')}
                 rules={[{ required: true }]}
               >
-                <InputNumber style={{ width: '100%' }} placeholder="e.g. 8080" min={1} max={65535} />
+                <InputNumber
+                  style={{ width: '100%', borderTopLeftRadius: 0, borderBottomLeftRadius: 0 }}
+                  placeholder="e.g. 8080"
+                  min={1}
+                  max={65535}
+                />
               </Form.Item>
             </Input.Group>
           </Form.Item>
-          <Form.Item label={chrome.i18n.getMessage('bypass_list')} name="bypassList">
+          <Form.Item
+            label={chrome.i18n.getMessage('bypass_list')}
+            extra={chrome.i18n.getMessage('bypass_list_extra')}
+            name="bypassList"
+          >
             <Input.TextArea
               style={{ resize: 'none' }}
               placeholder="e.g. <local>"
@@ -107,9 +116,7 @@ function Edit() {
                 cancelText={chrome.i18n.getMessage('cancel')}
                 onConfirm={onDelete}
               >
-                <Button type="link" danger>
-                  {chrome.i18n.getMessage('delete')}
-                </Button>
+                <Button danger>{chrome.i18n.getMessage('delete')}</Button>
               </Popconfirm>
             )}
           </Col>

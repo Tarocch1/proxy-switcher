@@ -35,6 +35,9 @@
   "bypass_list": {
     "message": "Bypass list"
   },
+  "bypass_list_extra": {
+    "message": "Enter one address per line."
+  },
   "delete": {
     "message": "Delete"
   },

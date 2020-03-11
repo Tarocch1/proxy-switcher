@@ -141,11 +141,7 @@ function List() {
         rowKey="id"
         showHeader={false}
         pagination={false}
-        footer={() => (
-          <Button type="link" onClick={() => mainModel.setShowMode('edit')}>
-            {chrome.i18n.getMessage('add')}
-          </Button>
-        )}
+        footer={() => <Button onClick={() => mainModel.setShowMode('edit')}>{chrome.i18n.getMessage('add')}</Button>}
         locale={{
           emptyText: <div style={{ textAlign: 'center' }}>{chrome.i18n.getMessage('no_proxy')}</div>,
         }}
