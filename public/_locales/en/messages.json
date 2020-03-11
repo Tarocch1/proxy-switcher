@@ -17,11 +17,11 @@
   "manual": {
     "message": "Manual"
   },
+  "auto": {
+    "message": "Auto"
+  },
   "direct": {
     "message": "Direct"
-  },
-  "system_proxy": {
-    "message": "System"
   },
   "proxy_scheme": {
     "message": "Proxy scheme"
@@ -37,6 +37,9 @@
   },
   "bypass_list_extra": {
     "message": "Enter one address per line."
+  },
+  "pac_file": {
+    "message": "PAC file"
   },
   "delete": {
     "message": "Delete"

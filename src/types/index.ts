@@ -10,4 +10,5 @@ export interface IProxyFormData {
   host: string;
   port: number | null;
   bypassList: string;
+  pacUrl: string;
 }

@@ -50,10 +50,16 @@ function Edit() {
         <Input />
       </Form.Item>
       <Form.Item label={chrome.i18n.getMessage('proxy_mode')} name="mode">
-        <Radio.Group buttonStyle="solid">
-          <Radio.Button value="fixed_servers">{chrome.i18n.getMessage('manual')}</Radio.Button>
-          <Radio.Button value="system">{chrome.i18n.getMessage('system_proxy')}</Radio.Button>
-          <Radio.Button value="direct">{chrome.i18n.getMessage('direct')}</Radio.Button>
+        <Radio.Group style={{ width: '100%' }} buttonStyle="solid">
+          <Radio.Button style={{ width: '33.3%', textAlign: 'center' }} value="fixed_servers">
+            {chrome.i18n.getMessage('manual')}
+          </Radio.Button>
+          <Radio.Button style={{ width: '33.3%', textAlign: 'center' }} value="pac_script">
+            {chrome.i18n.getMessage('auto')}
+          </Radio.Button>
+          <Radio.Button style={{ width: '33.3%', textAlign: 'center' }} value="direct">
+            {chrome.i18n.getMessage('direct')}
+          </Radio.Button>
         </Radio.Group>
       </Form.Item>
       {proxyMode === 'fixed_servers' && (
@@ -103,6 +109,11 @@ function Edit() {
             />
           </Form.Item>
         </React.Fragment>
+      )}
+      {proxyMode === 'pac_script' && (
+        <Form.Item label={chrome.i18n.getMessage('pac_file')} name="pacUrl" rules={[{ required: true }]}>
+          <Input placeholder="e.g. http://127.0.0.1:1080/pac" />
+        </Form.Item>
       )}
       <Form.Item>
         <Row justify="space-between">

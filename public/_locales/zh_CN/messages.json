@@ -15,13 +15,13 @@
     "message": "代理模式"
   },
   "manual": {
-    "message": "手动设置"
+    "message": "手动配置"
+  },
+  "auto": {
+    "message": "自动配置"
   },
   "direct": {
     "message": "直接连接"
-  },
-  "system_proxy": {
-    "message": "系统代理"
   },
   "proxy_scheme": {
     "message": "代理类型"
@@ -37,6 +37,9 @@
   },
   "bypass_list_extra": {
     "message": "每行输入一个地址。"
+  },
+  "pac_file": {
+    "message": "PAC 文件"
   },
   "delete": {
     "message": "删除"

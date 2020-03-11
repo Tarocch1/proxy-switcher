@@ -45,6 +45,15 @@ export function formDataToConfig(data: IProxyFormData): chrome.proxy.ProxyConfig
         },
       };
       break;
+    case 'pac_script':
+      proxyConfig = {
+        mode: 'pac_script',
+        pacScript: {
+          url: data.pacUrl,
+          mandatory: false,
+        },
+      };
+      break;
     default:
       break;
   }
