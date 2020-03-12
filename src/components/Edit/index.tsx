@@ -93,7 +93,18 @@ function Edit() {
           </Form.Item>
           <Form.Item
             label={chrome.i18n.getMessage('bypass_list')}
-            extra={chrome.i18n.getMessage('bypass_list_extra')}
+            extra={
+              <span>
+                {chrome.i18n.getMessage('bypass_list_extra')}
+                <a
+                  onClick={() => {
+                    chrome.tabs.create({ url: 'https://developer.chrome.com/extensions/proxy#bypass_list' });
+                  }}
+                >
+                  {chrome.i18n.getMessage('bypass_list_extra_example')}
+                </a>
+              </span>
+            }
             name="bypassList"
           >
             <Input.TextArea

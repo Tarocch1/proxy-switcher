@@ -36,7 +36,10 @@
     "message": "Bypass list"
   },
   "bypass_list_extra": {
-    "message": "Enter one address per line."
+    "message": "Enter one address per line. "
+  },
+  "bypass_list_extra_example": {
+    "message": "Example"
   },
   "pac_file": {
     "message": "PAC file"

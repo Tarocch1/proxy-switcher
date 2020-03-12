@@ -23,10 +23,9 @@ export function formDataToConfig(data: IProxyFormData): chrome.proxy.ProxyConfig
     mode: 'system',
   };
   switch (data.mode) {
-    case 'system':
     case 'direct':
       proxyConfig = {
-        mode: data.mode,
+        mode: 'direct',
       };
       break;
     case 'fixed_servers':

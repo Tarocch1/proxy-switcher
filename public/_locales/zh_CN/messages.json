@@ -38,6 +38,9 @@
   "bypass_list_extra": {
     "message": "每行输入一个地址。"
   },
+  "bypass_list_extra_example": {
+    "message": "样例"
+  },
   "pac_file": {
     "message": "PAC 文件"
   },
