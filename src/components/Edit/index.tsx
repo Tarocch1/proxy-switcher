@@ -49,7 +49,15 @@ function Edit() {
       <Form.Item label={chrome.i18n.getMessage('proxy_name')} name="name" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item label={chrome.i18n.getMessage('proxy_mode')} name="mode">
+      <Form.Item
+        label={chrome.i18n.getMessage('proxy_mode')}
+        name="mode"
+        extra={
+          proxyMode === 'direct' ? (
+            <span style={{ display: 'inline-block', margin: '4px 0' }}>{chrome.i18n.getMessage('direct_extra')}</span>
+          ) : null
+        }
+      >
         <Radio.Group buttonStyle="solid">
           <Radio.Button value="fixed_servers">{chrome.i18n.getMessage('manual')}</Radio.Button>
           <Radio.Button value="pac_script">{chrome.i18n.getMessage('auto')}</Radio.Button>
@@ -69,25 +77,20 @@ function Edit() {
           <Form.Item>
             <Input.Group compact>
               <Form.Item
-                style={{ marginTop: 0, marginBottom: 0, width: '66.7%' }}
+                style={{ marginBottom: 0, width: '66.7%' }}
                 name="host"
                 label={chrome.i18n.getMessage('proxy_host')}
                 rules={[{ required: true }]}
               >
-                <Input style={{ borderTopRightRadius: 0, borderBottomRightRadius: 0 }} placeholder="e.g. 127.0.0.1" />
+                <Input placeholder="e.g. 127.0.0.1" />
               </Form.Item>
               <Form.Item
-                style={{ marginTop: 0, marginBottom: 0, width: '33.3%' }}
+                style={{ marginBottom: 0, width: '33.3%' }}
                 name="port"
                 label={chrome.i18n.getMessage('proxy_port')}
                 rules={[{ required: true }]}
               >
-                <InputNumber
-                  style={{ width: '100%', borderTopLeftRadius: 0, borderBottomLeftRadius: 0 }}
-                  placeholder="e.g. 8080"
-                  min={1}
-                  max={65535}
-                />
+                <InputNumber placeholder="e.g. 8080" min={1} max={65535} />
               </Form.Item>
             </Input.Group>
           </Form.Item>
@@ -116,36 +119,70 @@ function Edit() {
         </React.Fragment>
       )}
       {proxyMode === 'pac_script' && (
-        <Form.Item label={chrome.i18n.getMessage('pac_file')} name="pacUrl" rules={[{ required: true }]}>
-          <Input placeholder="e.g. http://127.0.0.1:1080/pac" />
-        </Form.Item>
+        <React.Fragment>
+          <Form.Item
+            label={chrome.i18n.getMessage('pac_file')}
+            name="pacUrl"
+            normalize={value => {
+              setTimeout(() => form.validateFields(['pacScript']), 0);
+              return value;
+            }}
+            rules={[
+              ({ getFieldValue }) => ({
+                validator(rule, value) {
+                  if (getFieldValue('pacScript') || value) return Promise.resolve();
+                  return Promise.reject('error');
+                },
+              }),
+            ]}
+          >
+            <Input placeholder="e.g. http://127.0.0.1:1080/pac" />
+          </Form.Item>
+          <Form.Item
+            label={chrome.i18n.getMessage('pac_script')}
+            extra={chrome.i18n.getMessage('pac_script_extra')}
+            name="pacScript"
+            normalize={value => {
+              setTimeout(() => form.validateFields(['pacUrl']), 0);
+              return value;
+            }}
+            rules={[
+              ({ getFieldValue }) => ({
+                validator(rule, value) {
+                  if (getFieldValue('pacUrl') || value) return Promise.resolve();
+                  return Promise.reject('error');
+                },
+              }),
+            ]}
+          >
+            <Input.TextArea style={{ resize: 'none' }} autoSize={{ minRows: 4, maxRows: 4 }} />
+          </Form.Item>
+        </React.Fragment>
       )}
-      <Form.Item>
-        <Row justify="space-between">
-          <Col>
-            {mainModel.edittingProxy.id !== '' && (
-              <Popconfirm
-                arrowPointAtCenter
-                placement="topLeft"
-                title={chrome.i18n.getMessage('delete_confirm')}
-                okText={chrome.i18n.getMessage('confirm')}
-                cancelText={chrome.i18n.getMessage('cancel')}
-                onConfirm={onDelete}
-              >
-                <Button danger>{chrome.i18n.getMessage('delete')}</Button>
-              </Popconfirm>
-            )}
-          </Col>
-          <Col>
-            <Button style={{ marginRight: 8 }} onClick={onCancel}>
-              {chrome.i18n.getMessage('cancel')}
-            </Button>
-            <Button type="primary" htmlType="submit">
-              {chrome.i18n.getMessage(mainModel.edittingProxy.id !== '' ? 'save' : 'create')}
-            </Button>
-          </Col>
-        </Row>
-      </Form.Item>
+      <Row justify="space-between">
+        <Col>
+          {mainModel.edittingProxy.id !== '' && (
+            <Popconfirm
+              arrowPointAtCenter
+              placement="topLeft"
+              title={chrome.i18n.getMessage('delete_confirm')}
+              okText={chrome.i18n.getMessage('confirm')}
+              cancelText={chrome.i18n.getMessage('cancel')}
+              onConfirm={onDelete}
+            >
+              <Button danger>{chrome.i18n.getMessage('delete')}</Button>
+            </Popconfirm>
+          )}
+        </Col>
+        <Col>
+          <Button style={{ marginRight: 8 }} onClick={onCancel}>
+            {chrome.i18n.getMessage('cancel')}
+          </Button>
+          <Button type="primary" htmlType="submit">
+            {chrome.i18n.getMessage(mainModel.edittingProxy.id !== '' ? 'save' : 'create')}
+          </Button>
+        </Col>
+      </Row>
     </Form>
   );
 }

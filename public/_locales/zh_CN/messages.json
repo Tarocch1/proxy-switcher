@@ -23,6 +23,9 @@
   "direct": {
     "message": "直接连接"
   },
+  "direct_extra": {
+    "message": "浏览器将会直接连接到网络。"
+  },
   "proxy_scheme": {
     "message": "代理类型"
   },
@@ -43,6 +46,12 @@
   },
   "pac_file": {
     "message": "PAC 文件"
+  },
+  "pac_script": {
+    "message": "PAC 脚本"
+  },
+  "pac_script_extra": {
+    "message": "当配置了 PAC 文件时，此配置无效。"
   },
   "delete": {
     "message": "删除"

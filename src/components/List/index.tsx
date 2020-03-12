@@ -25,10 +25,7 @@ const DragableBodyRow = ({ index, moveRow, className, ...restProps }: any) => {
         dropClassName: dragIndex < index ? ' drop-over-downward' : ' drop-over-upward',
       };
     },
-    drop: item => {
-      console.log(item);
-      moveRow((item as any).index, index);
-    },
+    drop: item => moveRow((item as any).index, index),
   });
   const [, drag] = useDrag({
     item: { type, index },

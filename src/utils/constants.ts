@@ -9,4 +9,5 @@ export const DEFAULT_PROXY_FORMDATA: IProxyFormData = {
   port: null,
   bypassList: '',
   pacUrl: '',
+  pacScript: '',
 };

@@ -23,6 +23,9 @@
   "direct": {
     "message": "Direct"
   },
+  "direct_extra": {
+    "message": "The browser will connect directly to the network."
+  },
   "proxy_scheme": {
     "message": "Proxy scheme"
   },
@@ -43,6 +46,12 @@
   },
   "pac_file": {
     "message": "PAC file"
+  },
+  "pac_script": {
+    "message": "PAC script"
+  },
+  "pac_script_extra": {
+    "message": "Ignored if PAC file is set."
   },
   "delete": {
     "message": "Delete"

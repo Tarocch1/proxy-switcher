@@ -12,13 +12,8 @@ body {
   background: #bfbfbf;
 }
 
-#edit-form .ant-form-item:not(:last-of-type) {
+#edit-form > .ant-form-item {
   margin-bottom: 8px;
-}
-
-#edit-form .ant-form-item:last-of-type {
-  margin-top: 16px;
-  margin-bottom: 0px;
 }
 
 #edit-form .ant-form-item-label {
@@ -36,6 +31,17 @@ body {
 #edit-form #mode.ant-radio-group .ant-radio-button-wrapper {
   width: 33.3%;
   text-align: center;
+}
+
+#edit-form #host {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+#edit-form .ant-input-number {
+  width: 100%;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }
 
 #list tr.drop-over-downward td {
