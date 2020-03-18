@@ -1,6 +1,9 @@
 @import '~codemirror/lib/codemirror.css';
 @import '~codemirror/addon/dialog/dialog.css';
+@import '~codemirror/addon/scroll/simplescrollbars.css';
 @import '~codemirror/addon/search/matchesonscrollbar.css';
+@import '~codemirror/addon/display/fullscreen.css';
+@import '~codemirror/addon/fold/foldgutter.css';
 @import './styles/antd.css';
 
 body {
@@ -53,18 +56,26 @@ body {
 }
 
 #edit-form .CodeMirror {
+  border: 0 solid #d9d9d9;
+}
+
+#edit-form .CodeMirror:not(.CodeMirror-fullscreen) {
   border: 1px solid #d9d9d9;
   margin-bottom: 4px;
   height: 140px;
   transition: border-color 0.3s;
 }
 
-#edit-form .ant-form-item-has-error .CodeMirror {
+#edit-form .ant-form-item-has-error .CodeMirror:not(.CodeMirror-fullscreen) {
   border-color: #ff4d4f;
 }
 
 #edit-form .CodeMirror .CodeMirror-search-hint {
   display: none;
+}
+
+#edit-form .CodeMirror pre.CodeMirror-placeholder {
+  color: #bfbfbf;
 }
 
 #list tr.drop-over-downward td {

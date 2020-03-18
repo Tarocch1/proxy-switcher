@@ -114,6 +114,7 @@ function Edit() {
             <CodeMirror
               options={{
                 mode: null,
+                placeholder: 'e.g. <local>',
               }}
             />
           </Form.Item>
