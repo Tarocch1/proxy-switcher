@@ -1,3 +1,6 @@
+@import '~codemirror/lib/codemirror.css';
+@import '~codemirror/addon/dialog/dialog.css';
+@import '~codemirror/addon/search/matchesonscrollbar.css';
 @import './styles/antd.css';
 
 body {
@@ -6,6 +9,7 @@ body {
 
 ::-webkit-scrollbar {
   width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -22,6 +26,10 @@ body {
 
 #edit-form .ant-form-item-explain {
   display: none;
+}
+
+#edit-form #mode {
+  white-space: nowrap;
 }
 
 #edit-form #mode.ant-radio-group {
@@ -42,6 +50,21 @@ body {
   width: 100%;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
+}
+
+#edit-form .CodeMirror {
+  border: 1px solid #d9d9d9;
+  margin-bottom: 4px;
+  height: 140px;
+  transition: border-color 0.3s;
+}
+
+#edit-form .ant-form-item-has-error .CodeMirror {
+  border-color: #ff4d4f;
+}
+
+#edit-form .CodeMirror .CodeMirror-search-hint {
+  display: none;
 }
 
 #list tr.drop-over-downward td {

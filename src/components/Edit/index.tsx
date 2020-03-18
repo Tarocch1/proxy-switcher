@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Row, Col, Form, Radio, Select, Input, InputNumber, Button, Popconfirm } from 'antd';
 import { v4 as uuidv4 } from 'uuid';
 import { useModel } from '@tarocch1/use-model';
+import CodeMirror from './CodeMirror';
 import { MainModel } from '../../models';
 import { ProxyMode, IProxyFormData } from '../../types';
 import { DEFAULT_PROXY_FORMDATA } from '../../utils/constants';
@@ -110,10 +111,10 @@ function Edit() {
             }
             name="bypassList"
           >
-            <Input.TextArea
-              style={{ resize: 'none' }}
-              placeholder="e.g. <local>"
-              autoSize={{ minRows: 4, maxRows: 4 }}
+            <CodeMirror
+              options={{
+                mode: null,
+              }}
             />
           </Form.Item>
         </React.Fragment>
@@ -155,7 +156,11 @@ function Edit() {
               }),
             ]}
           >
-            <Input.TextArea style={{ resize: 'none' }} autoSize={{ minRows: 4, maxRows: 4 }} />
+            <CodeMirror
+              options={{
+                mode: 'javascript',
+              }}
+            />
           </Form.Item>
         </React.Fragment>
       )}
@@ -174,7 +179,7 @@ function Edit() {
             </Popconfirm>
           )}
         </Col>
-        <Col>
+        <Col style={{ flexGrow: 0 }}>
           <Button style={{ marginRight: 8 }} onClick={onCancel}>
             {chrome.i18n.getMessage('cancel')}
           </Button>
