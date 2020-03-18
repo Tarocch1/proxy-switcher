@@ -7,7 +7,7 @@
 @import './styles/antd.css';
 
 body {
-  width: 350px;
+  width: 400px;
 }
 
 ::-webkit-scrollbar {
@@ -55,10 +55,6 @@ body {
   border-bottom-left-radius: 0;
 }
 
-#edit-form .CodeMirror {
-  border: 0 solid #d9d9d9;
-}
-
 #edit-form .CodeMirror:not(.CodeMirror-fullscreen) {
   border: 1px solid #d9d9d9;
   margin-bottom: 4px;
@@ -72,6 +68,10 @@ body {
 
 #edit-form .CodeMirror .CodeMirror-search-hint {
   display: none;
+}
+
+#edit-form .CodeMirror.CodeMirror-fullscreen {
+  border: 0 solid #d9d9d9;
 }
 
 #edit-form .CodeMirror pre.CodeMirror-placeholder {

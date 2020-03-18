@@ -34,9 +34,11 @@ function CodeMirror({ value, options, onChange }: any) {
           'Alt-F': 'findPersistent',
           F11: (cm: any) => {
             cm.setOption('fullScreen', !cm.getOption('fullScreen'));
+            document.body.style.height = cm.getOption('fullScreen') ? '600px' : '';
           },
           Esc: (cm: any) => {
             if (cm.getOption('fullScreen')) cm.setOption('fullScreen', false);
+            document.body.style.height = '';
           },
         },
         ...options,
