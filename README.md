@@ -15,15 +15,10 @@
 ## Screenshot
 
 <p align="center">
-  <img alt="List" src="https://raw.githubusercontent.com/Tarocch1/ProxySwitcher/master/res/screenshot/list.png">
-</p>
-
-<p align="center">
-  <img alt="Add" src="https://raw.githubusercontent.com/Tarocch1/ProxySwitcher/master/res/screenshot/add.png">
-</p>
-
-<p align="center">
-  <img alt="PAC" src="https://raw.githubusercontent.com/Tarocch1/ProxySwitcher/master/res/screenshot/pac.png">
+  <img alt="List" width="300" src="https://raw.githubusercontent.com/Tarocch1/ProxySwitcher/master/res/screenshot/list.png">
+  <img alt="PAC" width="300" src="https://raw.githubusercontent.com/Tarocch1/ProxySwitcher/master/res/screenshot/pac.png">
+  <img alt="Add" width="300" src="https://raw.githubusercontent.com/Tarocch1/ProxySwitcher/master/res/screenshot/add.png">
+  <img alt="Fullscreen" width="300" src="https://raw.githubusercontent.com/Tarocch1/ProxySwitcher/master/res/screenshot/fullscreen.png">
 </p>
 
 ## Install
