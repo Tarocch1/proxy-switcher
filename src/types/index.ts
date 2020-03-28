@@ -9,6 +9,8 @@ export interface IProxyFormData {
   scheme: ProxyScheme;
   host: string;
   port: number | null;
+  username: string;
+  password: string;
   bypassList: string;
   pacUrl: string;
   pacScript: string;

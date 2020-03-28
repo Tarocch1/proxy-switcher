@@ -4,15 +4,17 @@ import { v4 as uuidv4 } from 'uuid';
 import { useModel } from '@tarocch1/use-model';
 import CodeMirror from './CodeMirror';
 import { MainModel } from '../../models';
-import { ProxyMode, IProxyFormData } from '../../types';
+import { ProxyMode, ProxyScheme, IProxyFormData } from '../../types';
 import { DEFAULT_PROXY_FORMDATA } from '../../utils/constants';
 
 function Edit() {
   const mainModel = useModel(MainModel);
   const [proxyMode, setProxyMode] = useState<ProxyMode>(mainModel.edittingProxy.mode);
+  const [proxyScheme, setProxyScheme] = useState<ProxyScheme>(mainModel.edittingProxy.scheme);
   const [form] = Form.useForm();
   const onValuesChange = (changedValues: any) => {
     if (changedValues.mode) setProxyMode(changedValues.mode);
+    if (changedValues.scheme) setProxyScheme(changedValues.scheme);
   };
   const onDelete = () => {
     mainModel.deleteProxy(mainModel.edittingProxy.id);
@@ -39,7 +41,7 @@ function Edit() {
   return (
     <Form
       id="edit-form"
-      style={{ padding: 16 }}
+      style={{ padding: '8px 16px 16px' }}
       form={form}
       layout="vertical"
       initialValues={mainModel.edittingProxy}
@@ -95,6 +97,26 @@ function Edit() {
               </Form.Item>
             </Input.Group>
           </Form.Item>
+          {proxyScheme.includes('http') && (
+            <Form.Item>
+              <Input.Group compact>
+                <Form.Item
+                  style={{ marginBottom: 0, width: '50%' }}
+                  name="username"
+                  label={chrome.i18n.getMessage('proxy_username')}
+                >
+                  <Input />
+                </Form.Item>
+                <Form.Item
+                  style={{ marginBottom: 0, width: '50%' }}
+                  name="password"
+                  label={chrome.i18n.getMessage('proxy_password')}
+                >
+                  <Input.Password />
+                </Form.Item>
+              </Input.Group>
+            </Form.Item>
+          )}
           <Form.Item
             label={chrome.i18n.getMessage('bypass_list')}
             extra={

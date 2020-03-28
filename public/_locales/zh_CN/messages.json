@@ -35,6 +35,12 @@
   "proxy_port": {
     "message": "代理端口"
   },
+  "proxy_username": {
+    "message": "用户名"
+  },
+  "proxy_password": {
+    "message": "密码"
+  },
   "bypass_list": {
     "message": "忽略地址"
   },

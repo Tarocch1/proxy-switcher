@@ -35,6 +35,12 @@
   "proxy_port": {
     "message": "Proxy port"
   },
+  "proxy_username": {
+    "message": "Username"
+  },
+  "proxy_password": {
+    "message": "Password"
+  },
   "bypass_list": {
     "message": "Bypass list"
   },

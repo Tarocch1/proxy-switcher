@@ -1,7 +1,7 @@
 import { ShowMode, IProxyFormData } from '../types';
 import { storageGetSync, storageSetSync } from '../utils/storage';
 import { proxyGetSync, proxySetSync, proxyClearSync, formDataToConfig } from '../utils/proxy';
-import { DEFAULT_PROXY_FORMDATA } from '../utils/constants';
+import { DEFAULT_PROXY_FORMDATA, MESSAGE_TYPE } from '../utils/constants';
 
 class MainModel {
   init: boolean = false;
@@ -44,13 +44,31 @@ class MainModel {
   }
 
   async setCurrentProxy(payload: string) {
-    await storageSetSync({ currentProxy: payload });
     const formData = this.proxyList.find(proxy => proxy.id === payload);
+    if (
+      formData?.mode === 'fixed_servers' &&
+      formData.scheme.includes('http') &&
+      formData.username &&
+      formData.password
+    ) {
+      chrome.runtime.sendMessage({
+        type: MESSAGE_TYPE.SET_HTTP_AUTH,
+        payload: {
+          username: formData.username,
+          password: formData.password,
+        },
+      });
+    } else {
+      chrome.runtime.sendMessage({
+        type: MESSAGE_TYPE.UNSET_HTTP_AUTH,
+      });
+    }
     const proxyConfig = formDataToConfig(formData!);
     await proxySetSync({
       scope: 'regular',
       value: proxyConfig,
     });
+    await storageSetSync({ currentProxy: payload });
     this.currentProxy = payload;
   }
 
@@ -98,11 +116,14 @@ class MainModel {
   }
 
   async clearProxy() {
-    await storageSetSync({
-      currentProxy: '',
+    chrome.runtime.sendMessage({
+      type: MESSAGE_TYPE.UNSET_HTTP_AUTH,
     });
     await proxyClearSync({
       scope: 'regular',
+    });
+    await storageSetSync({
+      currentProxy: '',
     });
     this.currentProxy = '';
   }
