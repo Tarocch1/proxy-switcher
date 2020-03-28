@@ -1,6 +1,6 @@
 {
   "name": "proxy-switcher",
-  "version": "0.9.2",
+  "version": "0.10.0",
   "private": true,
   "dependencies": {
     "@tarocch1/use-model": "^2.0.0",
