@@ -11,12 +11,12 @@ jobs:
     steps:
       - id: checkout
         name: Checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@v2
       - id: setup_nodejs
         name: Setup node.js
-        uses: actions/setup-node@master
+        uses: actions/setup-node@v1
         with:
-          node-version: 12
+          node-version: '12.x'
       - id: npm_ci
         name: npm ci
         run: npm ci
@@ -30,7 +30,7 @@ jobs:
           zip -r ProxySwitcher.zip ProxySwitcher
       - id: create_release
         name: Create Release
-        uses: actions/create-release@master
+        uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -38,7 +38,7 @@ jobs:
           release_name: Release ${{ github.ref }}
       - id: upload_release_asset
         name: Upload Release Asset
-        uses: actions/upload-release-asset@master
+        uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
