@@ -17,6 +17,12 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '14.x'
+      - id: ossutil
+        name: ossutil
+        run: |
+          wget http://gosspublic.alicdn.com/ossutil/1.7.1/ossutil64
+          chmod 755 ossutil64
+          ./ossutil64 config -e oss-cn-hongkong.aliyuncs.com -i ${{ secrets.ALIYUN_OSS_KEYID }} -k ${{ secrets.ALIYUN_OSS_SECRET }}
       - id: npm_ci
         name: npm ci
         run: npm ci
@@ -28,6 +34,9 @@ jobs:
         run: |
           mv build ProxySwitcher
           zip -r ProxySwitcher.zip ProxySwitcher
+      - id: upload
+        name: Upload to Aliyun oss
+        run: ./ossutil64 cp ProxySwitcher.zip oss://tarocch1-oss-hk-disk/ProxySwitcher/ProxySwitcher.zip -f
       - id: create_release
         name: Create Release
         uses: actions/create-release@v1
