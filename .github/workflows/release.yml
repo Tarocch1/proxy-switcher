@@ -39,7 +39,7 @@ jobs:
         run: ./ossutil64 cp ProxySwitcher.zip oss://tarocch1-oss-hk-disk/ProxySwitcher/ProxySwitcher.zip -f
       - id: create_release
         name: Create Release
-        uses: actions/create-release@v1
+        uses: actions/create-release@v1.1.4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
