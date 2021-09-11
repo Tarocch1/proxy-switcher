@@ -16,7 +16,7 @@ jobs:
         name: Setup node.js
         uses: actions/setup-node@v2.4.0
         with:
-          node-version: '14.x'
+          node-version: 'lts/*'
       - id: ossutil
         name: ossutil
         run: |
@@ -36,7 +36,7 @@ jobs:
           zip -r ProxySwitcher.zip ProxySwitcher
       - id: upload
         name: Upload to Aliyun oss
-        run: ./ossutil64 cp ProxySwitcher.zip oss://tarocch1-oss-hk-disk/ProxySwitcher/ProxySwitcher.zip -f
+        run: ./ossutil64 cp ProxySwitcher.zip oss://tarocch1-oss-hk-disk/backup/ProxySwitcher/ProxySwitcher.zip -f
       - id: create_release
         name: Create Release
         uses: actions/create-release@v1.1.4
