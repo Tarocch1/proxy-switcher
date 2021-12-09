@@ -12,15 +12,6 @@
 - 💥 支持 PAC 脚本。
 - 🎨 基于 React + Antd。
 
-## Screenshot
-
-<p align="center">
-  <img alt="List" width="400" src="https://raw.githubusercontent.com/Tarocch1/ProxySwitcher/master/res/screenshot/list.png">
-  <img alt="PAC" width="400" src="https://raw.githubusercontent.com/Tarocch1/ProxySwitcher/master/res/screenshot/pac.png">
-  <img alt="Add" width="400" src="https://raw.githubusercontent.com/Tarocch1/ProxySwitcher/master/res/screenshot/add.png">
-  <img alt="Fullscreen" width="400" src="https://raw.githubusercontent.com/Tarocch1/ProxySwitcher/master/res/screenshot/fullscreen.png">
-</p>
-
 ## Install
 
 由于 Google Chrome 商店与微软 Edge 商店奇怪的审核机制，该插件目前暂未上架，请下载最新的 release 版本手动安装使用。
