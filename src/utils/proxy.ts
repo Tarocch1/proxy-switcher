@@ -1,11 +1,6 @@
 import { v4 as uuidV4 } from 'uuid'
 
-export type ProxyMode =
-  | 'direct'
-  | 'auto_detect'
-  | 'pac_script'
-  | 'fixed_servers'
-  | 'system'
+export type ProxyMode = 'direct' | 'pac_script' | 'fixed_servers'
 export type ProxyScheme = 'http' | 'https' | 'quic' | 'socks4' | 'socks5'
 
 export type ProxyFormData = {

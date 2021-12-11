@@ -26,6 +26,7 @@
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "antd": "^4.17.3",
+    "events": "^3.3.0",
     "monaco-editor": "^0.31.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -35,6 +36,7 @@
   "devDependencies": {
     "@tarocch1/eslint-config": "^2.1.1",
     "@types/chrome": "^0.0.168",
+    "@types/events": "^3.0.0",
     "@types/node": "^16.11.12",
     "@types/react": "^17.0.37",
     "@types/react-dom": "^17.0.11",

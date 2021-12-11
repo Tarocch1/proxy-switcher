@@ -1,11 +1,13 @@
 import ReactDOM from 'react-dom'
 import { HashRouter } from 'react-router-dom'
-import { initI18n } from '@/utils/i18n'
+import { i18n } from '@/utils/i18n'
+import { storage } from '@/utils/storage'
 import { App } from './App'
 import 'antd/dist/antd.css'
 
 async function start() {
-  await initI18n()
+  await i18n.init()
+  await storage.init()
 
   ReactDOM.render(
     <HashRouter>

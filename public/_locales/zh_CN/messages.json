@@ -79,5 +79,8 @@
   },
   "save": {
     "message": "保存"
+  },
+  "success": {
+    "message": "成功"
   }
 }

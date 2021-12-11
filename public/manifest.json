@@ -12,5 +12,5 @@
     "128": "icons/icon128.png"
   },
   "options_page": "pages/options.html",
-  "permissions": ["proxy", "storage"]
+  "permissions": ["storage", "proxy"]
 }

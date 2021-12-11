@@ -1,16 +1,51 @@
 import React, { useEffect } from 'react'
-import { Form, Input, Radio, Button, Select, InputNumber } from 'antd'
+import {
+  Form,
+  Input,
+  Radio,
+  Button,
+  Select,
+  InputNumber,
+  Popconfirm,
+  message,
+} from 'antd'
 import { ProxyFormData, Proxy } from '@/utils/proxy'
-import { getMessage } from '@/utils/i18n'
+import { i18n } from '@/utils/i18n'
+import { storage } from '@/utils/storage'
 import { Monaco } from '../Monaco'
 import classes from './style.module.css'
 
-export function ProxyForm() {
+export type ProxyFormProps = {
+  id?: string
+}
+
+export function ProxyForm({ id }: ProxyFormProps) {
   const [form] = Form.useForm<ProxyFormData>()
 
-  useEffect(() => {
-    form.setFieldsValue(Proxy.default())
-  }, [])
+  useEffect(
+    function () {
+      form.resetFields()
+      form.setFieldsValue(id ? storage.proxy[id] : Proxy.default())
+    },
+    [id]
+  )
+
+  const onFinish = function (values: Partial<ProxyFormData>) {
+    storage.addOrEditProxy({
+      ...Proxy.default(),
+      ...(id ? { id } : {}),
+      ...values,
+    })
+    message.success(i18n.getMessage('success'))
+    if (!id) {
+      form.resetFields()
+    }
+  }
+
+  const onDelete = function () {
+    storage.deleteProxy(id!) // eslint-disable-line @typescript-eslint/no-non-null-assertion
+    message.success(i18n.getMessage('success'))
+  }
 
   const renderForm = function () {
     switch (form.getFieldValue('mode')) {
@@ -18,7 +53,7 @@ export function ProxyForm() {
         return (
           <React.Fragment>
             <Form.Item
-              label={getMessage('proxy_scheme')}
+              label={i18n.getMessage('proxy_scheme')}
               name="scheme"
               rules={[{ required: true }]}
             >
@@ -31,14 +66,14 @@ export function ProxyForm() {
             </Form.Item>
             <Form.Item
               name="host"
-              label={getMessage('proxy_host')}
+              label={i18n.getMessage('proxy_host')}
               rules={[{ required: true }]}
             >
               <Input placeholder="e.g. 127.0.0.1"></Input>
             </Form.Item>
             <Form.Item
               name="post"
-              label={getMessage('proxy_port')}
+              label={i18n.getMessage('proxy_port')}
               rules={[{ required: true }]}
             >
               <InputNumber
@@ -54,14 +89,14 @@ export function ProxyForm() {
               <React.Fragment>
                 <Form.Item
                   name="username"
-                  label={getMessage('proxy_username')}
+                  label={i18n.getMessage('proxy_username')}
                   rules={[{ required: true }]}
                 >
                   <Input></Input>
                 </Form.Item>
                 <Form.Item
                   name="password"
-                  label={getMessage('proxy_password')}
+                  label={i18n.getMessage('proxy_password')}
                   rules={[{ required: true }]}
                 >
                   <Input.Password></Input.Password>
@@ -70,16 +105,16 @@ export function ProxyForm() {
             )}
             <Form.Item
               name="bypassList"
-              label={getMessage('bypass_list')}
+              label={i18n.getMessage('bypass_list')}
               extra={
                 <span>
-                  {getMessage('bypass_list_extra')}
+                  {i18n.getMessage('bypass_list_extra')}
                   <a
                     href="https://developer.chrome.com/docs/extensions/reference/proxy/#bypass-list"
                     target="_blank"
                     rel="noreferrer"
                   >
-                    {getMessage('bypass_list_extra_example')}
+                    {i18n.getMessage('bypass_list_extra_example')}
                   </a>
                 </span>
               }
@@ -93,7 +128,7 @@ export function ProxyForm() {
           <React.Fragment>
             <Form.Item
               name="pacUrl"
-              label={getMessage('pac_file')}
+              label={i18n.getMessage('pac_file')}
               normalize={(value) => {
                 setTimeout(() => form.validateFields(['pacScript']), 0)
                 return value
@@ -112,7 +147,7 @@ export function ProxyForm() {
             </Form.Item>
             <Form.Item
               name="pacScript"
-              label={getMessage('pac_script')}
+              label={i18n.getMessage('pac_script')}
               normalize={(value) => {
                 setTimeout(() => form.validateFields(['pacUrl']), 0)
                 return value
@@ -126,7 +161,7 @@ export function ProxyForm() {
                   },
                 }),
               ]}
-              extra={<span>{getMessage('pac_script_extra')}</span>}
+              extra={<span>{i18n.getMessage('pac_script_extra')}</span>}
             >
               <Monaco language="javascript"></Monaco>
             </Form.Item>
@@ -135,10 +170,6 @@ export function ProxyForm() {
       default:
         break
     }
-  }
-
-  const onFinish = function (values: ProxyFormData) {
-    console.log(values)
   }
 
   return (
@@ -150,11 +181,12 @@ export function ProxyForm() {
       validateMessages={{
         required: '',
       }}
+      initialValues={Proxy.default()}
       onFinish={onFinish}
     >
       <Form.Item
         name="name"
-        label={getMessage('proxy_name')}
+        label={i18n.getMessage('proxy_name')}
         rules={[{ required: true }]}
       >
         <Input></Input>
@@ -163,11 +195,11 @@ export function ProxyForm() {
         {() => (
           <Form.Item
             name="mode"
-            label={getMessage('proxy_mode')}
+            label={i18n.getMessage('proxy_mode')}
             rules={[{ required: true }]}
             extra={
               form.getFieldValue('mode') === 'direct' ? (
-                <span>{getMessage('direct_extra')}</span>
+                <span>{i18n.getMessage('direct_extra')}</span>
               ) : (
                 ''
               )
@@ -175,12 +207,14 @@ export function ProxyForm() {
           >
             <Radio.Group buttonStyle="solid">
               <Radio.Button value="fixed_servers">
-                {getMessage('manual')}
+                {i18n.getMessage('manual')}
               </Radio.Button>
               <Radio.Button value="pac_script">
-                {getMessage('auto')}
+                {i18n.getMessage('auto')}
               </Radio.Button>
-              <Radio.Button value="direct">{getMessage('direct')}</Radio.Button>
+              <Radio.Button value="direct">
+                {i18n.getMessage('direct')}
+              </Radio.Button>
             </Radio.Group>
           </Form.Item>
         )}
@@ -191,8 +225,22 @@ export function ProxyForm() {
       </Form.Item>
       <Form.Item wrapperCol={{ offset: 4, span: 12 }}>
         <Button type="primary" htmlType="submit">
-          {getMessage('create')}
+          {i18n.getMessage(id ? 'save' : 'create')}
         </Button>
+        {id && (
+          <Popconfirm
+            arrowPointAtCenter
+            placement="topLeft"
+            title={i18n.getMessage('delete_confirm')}
+            okText={i18n.getMessage('confirm')}
+            cancelText={i18n.getMessage('cancel')}
+            onConfirm={onDelete}
+          >
+            <Button style={{ marginLeft: 8 }} danger>
+              {i18n.getMessage('delete')}
+            </Button>
+          </Popconfirm>
+        )}
       </Form.Item>
     </Form>
   )

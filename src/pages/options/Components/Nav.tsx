@@ -1,6 +1,6 @@
 import { Menu } from 'antd'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { getMessage } from '@/utils/i18n'
+import { i18n } from '@/utils/i18n'
 
 export function Nav() {
   const location = useLocation()
@@ -13,7 +13,7 @@ export function Nav() {
       selectedKeys={[location.pathname]}
       onSelect={({ key }) => navigate(key)}
     >
-      <Menu.Item key="/">{getMessage('proxy')}</Menu.Item>
+      <Menu.Item key="/">{i18n.getMessage('proxy')}</Menu.Item>
     </Menu>
   )
 }
