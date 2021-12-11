@@ -2,9 +2,9 @@
 
 一个用于管理代理设置的浏览器插件。
 
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/Tarocch1/ProxySwitcher)](https://github.com/Tarocch1/ProxySwitcher/releases)
-[![GitHub](https://img.shields.io/github/license/Tarocch1/ProxySwitcher)](https://github.com/Tarocch1/ProxySwitcher/blob/master/LICENSE)
-![Release Workflow](https://github.com/Tarocch1/ProxySwitcher/workflows/Release%20Workflow/badge.svg)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/Tarocch1/proxy-switcher)](https://github.com/Tarocch1/proxy-switcher/releases)
+[![GitHub](https://img.shields.io/github/license/Tarocch1/proxy-switcher)](https://github.com/Tarocch1/proxy-switcher/blob/master/LICENSE)
+![Release Workflow](https://github.com/Tarocch1/proxy-switcher/workflows/Release%20Workflow/badge.svg)
 
 ## Features
 
