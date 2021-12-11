@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { Layout, Menu } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
-import { ProxyForm } from '@/pages/Index/Components/ProxyForm'
+import { ProxyForm } from '@/pages/options/Components/ProxyForm'
+import { getMessage } from '@/utils/i18n'
 import classes from './style.module.css'
 
 const { Content, Sider } = Layout
@@ -19,7 +20,7 @@ export function Proxy() {
           onSelect={({ key }) => setSelectedKey(key)}
         >
           <Menu.Item key={ADD} icon={<PlusOutlined />}>
-            添加
+            {getMessage('add')}
           </Menu.Item>
         </Menu>
       </Sider>

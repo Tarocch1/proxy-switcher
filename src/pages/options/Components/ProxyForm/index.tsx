@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { Form, Input, Radio, Button, Select, InputNumber } from 'antd'
 import { ProxyFormData, Proxy } from '@/utils/proxy'
+import { getMessage } from '@/utils/i18n'
 import { Monaco } from '../Monaco'
 import classes from './style.module.css'
 
@@ -17,7 +18,7 @@ export function ProxyForm() {
         return (
           <React.Fragment>
             <Form.Item
-              label="代理类型"
+              label={getMessage('proxy_scheme')}
               name="scheme"
               rules={[{ required: true }]}
             >
@@ -30,14 +31,14 @@ export function ProxyForm() {
             </Form.Item>
             <Form.Item
               name="host"
-              label="代理地址"
+              label={getMessage('proxy_host')}
               rules={[{ required: true }]}
             >
               <Input placeholder="e.g. 127.0.0.1"></Input>
             </Form.Item>
             <Form.Item
               name="post"
-              label="代理端口"
+              label={getMessage('proxy_port')}
               rules={[{ required: true }]}
             >
               <InputNumber
@@ -53,14 +54,14 @@ export function ProxyForm() {
               <React.Fragment>
                 <Form.Item
                   name="username"
-                  label="用户名"
+                  label={getMessage('proxy_username')}
                   rules={[{ required: true }]}
                 >
                   <Input></Input>
                 </Form.Item>
                 <Form.Item
                   name="password"
-                  label="密码"
+                  label={getMessage('proxy_password')}
                   rules={[{ required: true }]}
                 >
                   <Input.Password></Input.Password>
@@ -69,16 +70,16 @@ export function ProxyForm() {
             )}
             <Form.Item
               name="bypassList"
-              label="忽略地址"
+              label={getMessage('bypass_list')}
               extra={
                 <span>
-                  每行输入一个地址。
+                  {getMessage('bypass_list_extra')}
                   <a
                     href="https://developer.chrome.com/docs/extensions/reference/proxy/#bypass-list"
                     target="_blank"
                     rel="noreferrer"
                   >
-                    样例
+                    {getMessage('bypass_list_extra_example')}
                   </a>
                 </span>
               }
@@ -92,7 +93,7 @@ export function ProxyForm() {
           <React.Fragment>
             <Form.Item
               name="pacUrl"
-              label="PAC 文件"
+              label={getMessage('pac_file')}
               normalize={(value) => {
                 setTimeout(() => form.validateFields(['pacScript']), 0)
                 return value
@@ -111,7 +112,7 @@ export function ProxyForm() {
             </Form.Item>
             <Form.Item
               name="pacScript"
-              label="PAC 脚本"
+              label={getMessage('pac_script')}
               normalize={(value) => {
                 setTimeout(() => form.validateFields(['pacUrl']), 0)
                 return value
@@ -125,7 +126,7 @@ export function ProxyForm() {
                   },
                 }),
               ]}
-              extra={<span>当配置了 PAC 文件时，此配置无效。</span>}
+              extra={<span>{getMessage('pac_script_extra')}</span>}
             >
               <Monaco language="javascript"></Monaco>
             </Form.Item>
@@ -151,27 +152,35 @@ export function ProxyForm() {
       }}
       onFinish={onFinish}
     >
-      <Form.Item name="name" label="代理名称" rules={[{ required: true }]}>
+      <Form.Item
+        name="name"
+        label={getMessage('proxy_name')}
+        rules={[{ required: true }]}
+      >
         <Input></Input>
       </Form.Item>
       <Form.Item shouldUpdate noStyle>
         {() => (
           <Form.Item
             name="mode"
-            label="代理模式"
+            label={getMessage('proxy_mode')}
             rules={[{ required: true }]}
             extra={
               form.getFieldValue('mode') === 'direct' ? (
-                <span>浏览器将会直接连接到网络。</span>
+                <span>{getMessage('direct_extra')}</span>
               ) : (
                 ''
               )
             }
           >
             <Radio.Group buttonStyle="solid">
-              <Radio.Button value="fixed_servers">手动模式</Radio.Button>
-              <Radio.Button value="pac_script">自动模式</Radio.Button>
-              <Radio.Button value="direct">直接连接</Radio.Button>
+              <Radio.Button value="fixed_servers">
+                {getMessage('manual')}
+              </Radio.Button>
+              <Radio.Button value="pac_script">
+                {getMessage('auto')}
+              </Radio.Button>
+              <Radio.Button value="direct">{getMessage('direct')}</Radio.Button>
             </Radio.Group>
           </Form.Item>
         )}
@@ -182,7 +191,7 @@ export function ProxyForm() {
       </Form.Item>
       <Form.Item wrapperCol={{ offset: 4, span: 12 }}>
         <Button type="primary" htmlType="submit">
-          创建
+          {getMessage('create')}
         </Button>
       </Form.Item>
     </Form>

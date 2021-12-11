@@ -1,0 +1,83 @@
+{
+  "controlled_by_other_extensions": {
+    "message": "其它插件控制了代理配置！"
+  },
+  "proxy": {
+    "message": "代理"
+  },
+  "add": {
+    "message": "添加"
+  },
+  "no_proxy": {
+    "message": "暂无代理"
+  },
+  "proxy_name": {
+    "message": "代理名称"
+  },
+  "proxy_mode": {
+    "message": "代理模式"
+  },
+  "manual": {
+    "message": "手动配置"
+  },
+  "auto": {
+    "message": "自动配置"
+  },
+  "direct": {
+    "message": "直接连接"
+  },
+  "direct_extra": {
+    "message": "浏览器将会直接连接到网络。"
+  },
+  "proxy_scheme": {
+    "message": "代理类型"
+  },
+  "proxy_host": {
+    "message": "代理地址"
+  },
+  "proxy_port": {
+    "message": "代理端口"
+  },
+  "proxy_username": {
+    "message": "用户名"
+  },
+  "proxy_password": {
+    "message": "密码"
+  },
+  "bypass_list": {
+    "message": "忽略地址"
+  },
+  "bypass_list_extra": {
+    "message": "每行输入一个地址。"
+  },
+  "bypass_list_extra_example": {
+    "message": "样例"
+  },
+  "pac_file": {
+    "message": "PAC 文件"
+  },
+  "pac_script": {
+    "message": "PAC 脚本"
+  },
+  "pac_script_extra": {
+    "message": "当配置了 PAC 文件时，此配置无效。"
+  },
+  "delete": {
+    "message": "删除"
+  },
+  "delete_confirm": {
+    "message": "是否要删除此配置？"
+  },
+  "confirm": {
+    "message": "确定"
+  },
+  "cancel": {
+    "message": "取消"
+  },
+  "create": {
+    "message": "创建"
+  },
+  "save": {
+    "message": "保存"
+  }
+}

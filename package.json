@@ -5,7 +5,7 @@
   "scripts": {
     "start": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview",
+    "debug": "vite build -w",
     "lint": "eslint --fix 'src/**/*.ts' 'src/**/*.tsx'"
   },
   "husky": {
