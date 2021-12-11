@@ -1,0 +1,16 @@
+.header {
+  position: fixed;
+  width: 100%;
+  z-index: 10000;
+}
+
+.logo {
+  float: left;
+  width: 32px;
+  margin: 16px;
+  margin-left: 0;
+}
+
+.content {
+  margin-top: 64px;
+}

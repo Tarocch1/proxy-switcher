@@ -1,0 +1,12 @@
+.form {
+  max-width: 1000px;
+  margin: auto !important;
+}
+
+.form :global(.ant-form-item-with-help) {
+  margin-bottom: 24px;
+}
+
+.form :global(.ant-form-item-explain) {
+  display: none;
+}

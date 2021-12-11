@@ -1,26 +1,19 @@
 import { Layout } from 'antd'
 import { Routes, Route } from 'react-router-dom'
-import Nav from './Components/Nav'
-import Proxy from './views/Proxy'
+import { Nav } from './Components/Nav'
+import { Proxy } from './views/Proxy'
+import classes from './app.module.css'
 
 const { Header, Content } = Layout
 
-function App() {
+export function App() {
   return (
     <Layout>
-      <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
-        <img
-          style={{
-            float: 'left',
-            width: 32,
-            margin: 16,
-            marginLeft: 0,
-          }}
-          src="/icons/icon128.png"
-        ></img>
+      <Header className={classes.header}>
+        <img className={classes.logo} src="/icons/icon128.png"></img>
         <Nav></Nav>
       </Header>
-      <Content style={{ marginTop: 64 }}>
+      <Content className={classes.content}>
         <Routes>
           <Route path="/" element={<Proxy></Proxy>}></Route>
         </Routes>
@@ -28,5 +21,3 @@ function App() {
     </Layout>
   )
 }
-
-export default App
