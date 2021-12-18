@@ -18,7 +18,11 @@ export type ProxyFormData = {
 }
 
 export class Proxy {
-  constructor(private form: ProxyFormData) {}
+  config: ProxyFormData
+
+  constructor(private form: ProxyFormData) {
+    this.config = this.format(this.form)
+  }
 
   static default(): ProxyFormData {
     return {
@@ -33,6 +37,39 @@ export class Proxy {
       bypassList: '',
       pacUrl: '',
       pacScript: '',
+    }
+  }
+
+  private format(proxyFormData: ProxyFormData): ProxyFormData {
+    let keys: Array<keyof ProxyFormData> = []
+
+    if (proxyFormData.mode === 'direct') {
+      keys = ['id', 'name', 'mode']
+    } else if (proxyFormData.mode === 'pac_script') {
+      keys = ['id', 'name', 'mode', 'pacScript', 'pacUrl']
+    } else if (['http', 'https'].includes(proxyFormData.scheme)) {
+      keys = [
+        'id',
+        'name',
+        'mode',
+        'scheme',
+        'host',
+        'port',
+        'username',
+        'password',
+        'bypassList',
+      ]
+    } else {
+      keys = ['id', 'name', 'mode', 'scheme', 'host', 'port', 'bypassList']
+    }
+
+    return {
+      ...Proxy.default(),
+      ...Object.fromEntries(
+        Object.entries(proxyFormData).filter(([key]) =>
+          keys.includes(key as keyof ProxyFormData)
+        )
+      ),
     }
   }
 }

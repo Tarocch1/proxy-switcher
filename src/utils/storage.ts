@@ -1,4 +1,4 @@
-import { ProxyFormData } from './proxy'
+import { Proxy, ProxyFormData } from './proxy'
 import { eventEmitter, STORAGE_CHANGED } from './event'
 
 type Storages = {
@@ -40,11 +40,12 @@ class Storage {
     return this.storages.proxy
   }
 
-  addOrEditProxy(proxy: ProxyFormData) {
+  addOrEditProxy(proxyFormData: ProxyFormData) {
+    const proxy = new Proxy(proxyFormData)
     chrome.storage.sync.set({
       proxy: {
         ...this.proxy,
-        [proxy.id]: proxy,
+        [proxy.config.id]: proxy.config,
       },
     })
   }

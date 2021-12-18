@@ -7,7 +7,10 @@ import {
   ListItemIcon,
   ListItemText,
 } from '@mui/material'
-import AddIcon from '@mui/icons-material/Add'
+import AddOutlinedIcon from '@mui/icons-material/AddOutlined'
+import PolylineOutlinedIcon from '@mui/icons-material/PolylineOutlined'
+import SignpostOutlinedIcon from '@mui/icons-material/SignpostOutlined'
+import RouteOutlinedIcon from '@mui/icons-material/RouteOutlined'
 import { ProxyForm } from '@/pages/options/Components/ProxyForm'
 import { i18n } from '@/utils/i18n'
 import { storage } from '@/utils/storage'
@@ -56,7 +59,13 @@ export function Proxy() {
               onClick={() => setSelectedKey(proxy.id)}
             >
               <ListItemIcon>
-                <AddIcon />
+                {
+                  {
+                    fixed_servers: <PolylineOutlinedIcon />,
+                    pac_script: <SignpostOutlinedIcon />,
+                    direct: <RouteOutlinedIcon />,
+                  }[proxy.mode]
+                }
               </ListItemIcon>
               <ListItemText primary={proxy.name} />
             </ListItemButton>
@@ -67,7 +76,7 @@ export function Proxy() {
             onClick={() => setSelectedKey(ADD)}
           >
             <ListItemIcon>
-              <AddIcon />
+              <AddOutlinedIcon />
             </ListItemIcon>
             <ListItemText primary={i18n.getMessage('add')} />
           </ListItemButton>
