@@ -1,18 +1,17 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
-import { Layout, Menu } from 'antd'
 import {
-  PlusOutlined,
-  ApiOutlined,
-  CodeOutlined,
-  ClusterOutlined,
-} from '@ant-design/icons'
+  Grid,
+  List,
+  Divider,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+} from '@mui/material'
+import AddIcon from '@mui/icons-material/Add'
 import { ProxyForm } from '@/pages/options/Components/ProxyForm'
 import { i18n } from '@/utils/i18n'
 import { storage } from '@/utils/storage'
 import { eventEmitter, STORAGE_CHANGED } from '@/utils/event'
-import classes from './style.module.css'
-
-const { Content, Sider } = Layout
 
 const ADD = 'add'
 
@@ -47,37 +46,36 @@ export function Proxy() {
   }, [])
 
   return (
-    <Layout className={classes.layout}>
-      <Sider className={classes.sider} width={300}>
-        <Menu
-          mode="inline"
-          selectedKeys={[selectedKey]}
-          onSelect={({ key }) => setSelectedKey(key)}
-        >
+    <Grid container>
+      <Grid item>
+        <List sx={{ width: 300 }}>
           {Object.values(storage.proxy).map((proxy) => (
-            <Menu.Item
+            <ListItemButton
               key={proxy.id}
-              icon={
-                {
-                  direct: <ApiOutlined />,
-                  pac_script: <CodeOutlined />,
-                  fixed_servers: <ClusterOutlined />,
-                }[proxy.mode]
-              }
+              selected={selectedKey === proxy.id}
+              onClick={() => setSelectedKey(proxy.id)}
             >
-              {proxy.name}
-            </Menu.Item>
+              <ListItemIcon>
+                <AddIcon />
+              </ListItemIcon>
+              <ListItemText primary={proxy.name} />
+            </ListItemButton>
           ))}
-          <Menu.Item key={ADD} icon={<PlusOutlined />}>
-            {i18n.getMessage('add')}
-          </Menu.Item>
-        </Menu>
-      </Sider>
-      <Content className={classes.content}>
-        <ProxyForm
-          id={selectedKey === ADD ? undefined : selectedKey}
-        ></ProxyForm>
-      </Content>
-    </Layout>
+          {Object.values(storage.proxy).length > 0 && <Divider />}
+          <ListItemButton
+            selected={selectedKey === ADD}
+            onClick={() => setSelectedKey(ADD)}
+          >
+            <ListItemIcon>
+              <AddIcon />
+            </ListItemIcon>
+            <ListItemText primary={i18n.getMessage('add')} />
+          </ListItemButton>
+        </List>
+      </Grid>
+      <Grid item sx={{ flexGrow: 1, paddingX: 2, paddingY: 4 }}>
+        <ProxyForm id={selectedKey === ADD ? undefined : selectedKey} />
+      </Grid>
+    </Grid>
   )
 }

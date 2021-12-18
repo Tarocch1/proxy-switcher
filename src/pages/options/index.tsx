@@ -1,9 +1,9 @@
 import ReactDOM from 'react-dom'
 import { HashRouter } from 'react-router-dom'
+import { CssBaseline } from '@mui/material'
 import { i18n } from '@/utils/i18n'
 import { storage } from '@/utils/storage'
 import { App } from './App'
-import 'antd/dist/antd.css'
 
 async function start() {
   await i18n.init()
@@ -11,7 +11,9 @@ async function start() {
 
   ReactDOM.render(
     <HashRouter>
-      <App />
+      <CssBaseline>
+        <App />
+      </CssBaseline>
     </HashRouter>,
     document.querySelector('#root')
   )

@@ -9,7 +9,7 @@ export type ProxyFormData = {
   mode: ProxyMode
   scheme: ProxyScheme
   host: string
-  port: number | null
+  port: number | ''
   username: string
   password: string
   bypassList: string
@@ -27,7 +27,7 @@ export class Proxy {
       mode: 'fixed_servers',
       scheme: 'http',
       host: '',
-      port: null,
+      port: '',
       username: '',
       password: '',
       bypassList: '',

@@ -1,23 +1,18 @@
-import { Layout } from 'antd'
 import { Routes, Route } from 'react-router-dom'
+import { Box } from '@mui/material'
 import { Nav } from './Components/Nav'
 import { Proxy } from './views/Proxy'
-import classes from './app.module.css'
-
-const { Header, Content } = Layout
+import React from 'react'
 
 export function App() {
   return (
-    <Layout>
-      <Header className={classes.header}>
-        <img className={classes.logo} src="/icons/icon128.png"></img>
-        <Nav></Nav>
-      </Header>
-      <Content className={classes.content}>
+    <React.Fragment>
+      <Nav />
+      <Box>
         <Routes>
-          <Route path="/" element={<Proxy></Proxy>}></Route>
+          <Route path="/" element={<Proxy />} />
         </Routes>
-      </Content>
-    </Layout>
+      </Box>
+    </React.Fragment>
   )
 }
