@@ -2,7 +2,7 @@ import { Proxy, ProxyFormData } from './proxy'
 import { eventEmitter, STORAGE_CHANGED } from './event'
 
 type Storages = {
-  proxy: { [id: string]: ProxyFormData }
+  proxy: ProxyFormData[]
   current: string
 }
 
@@ -10,7 +10,7 @@ class Storage {
   private keys = ['proxy', 'current']
   private storages: Storages = {
     current: '',
-    proxy: {},
+    proxy: [],
   }
 
   constructor() {
@@ -43,18 +43,13 @@ class Storage {
   addOrEditProxy(proxyFormData: ProxyFormData) {
     const proxy = new Proxy(proxyFormData)
     chrome.storage.sync.set({
-      proxy: {
-        ...this.proxy,
-        [proxy.config.id]: proxy.config,
-      },
+      proxy: [...this.proxy, proxy.config],
     })
   }
 
   deleteProxy(id: string) {
     chrome.storage.sync.set({
-      proxy: Object.fromEntries(
-        Object.entries(this.proxy).filter(([_id]) => _id !== id)
-      ),
+      proxy: this.proxy.filter((proxy) => proxy.id !== id),
     })
   }
 }

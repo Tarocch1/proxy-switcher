@@ -25,7 +25,7 @@ export function Proxy() {
 
   const storageChangeHandler = useCallback(function () {
     if (
-      !storage.proxy[selectedKeyRef.current] &&
+      !storage.proxy.some((proxy) => proxy.id === selectedKeyRef.current) &&
       selectedKeyRef.current !== ADD
     ) {
       setSelectedKey(ADD)
@@ -52,7 +52,7 @@ export function Proxy() {
     <Grid container>
       <Grid item>
         <List sx={{ width: 300 }}>
-          {Object.values(storage.proxy).map((proxy) => (
+          {storage.proxy.map((proxy) => (
             <ListItemButton
               key={proxy.id}
               selected={selectedKey === proxy.id}

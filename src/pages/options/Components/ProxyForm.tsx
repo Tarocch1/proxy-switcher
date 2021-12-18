@@ -55,7 +55,9 @@ export function ProxyForm({ id }: ProxyFormProps) {
   useEffect(
     function () {
       formik.resetForm({
-        values: id ? storage.proxy[id] : Proxy.default(),
+        values: id
+          ? storage.proxy.find((proxy) => proxy.id === id)
+          : Proxy.default(),
       })
     },
     [id]
