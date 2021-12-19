@@ -40,11 +40,22 @@ class Storage {
     return this.storages.proxy
   }
 
-  addOrEditProxy(proxyFormData: ProxyFormData) {
-    const proxy = new Proxy(proxyFormData)
+  set proxy(proxy: ProxyFormData[]) {
     chrome.storage.sync.set({
-      proxy: [...this.proxy, proxy.config],
+      proxy,
     })
+  }
+
+  addOrEditProxy(proxyFormData: ProxyFormData) {
+    const p = new Proxy(proxyFormData)
+    const index = this.proxy.findIndex((_p) => _p.id === p.config.id)
+    const proxy = [...this.proxy]
+    if (index > -1) {
+      proxy[index] = p.config
+    } else {
+      proxy.push(p.config)
+    }
+    this.proxy = proxy
   }
 
   deleteProxy(id: string) {

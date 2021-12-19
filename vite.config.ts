@@ -1,14 +1,14 @@
 import { resolve } from 'path'
 import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import vue from '@vitejs/plugin-vue'
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [vue()],
   build: {
     rollupOptions: {
       input: {
-        options: resolve(__dirname, 'pages/options.html')
-      }
+        options: resolve(__dirname, 'pages/options.html'),
+      },
     },
   },
   resolve: {

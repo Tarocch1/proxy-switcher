@@ -12,7 +12,7 @@ class I18n {
     }
   }
 
-  getMessage(messageName: string) {
+  getMessage = (messageName: string) => {
     if (chrome && chrome.i18n) return chrome.i18n.getMessage(messageName)
     if (this.messages[messageName]) return this.messages[messageName].message
     return 'unknown'
