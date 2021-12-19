@@ -10,7 +10,7 @@
 
 - ✨ 支持 HTTP(S)、Socks(4/5)代理。
 - 💥 支持 PAC 脚本。
-- 🎨 基于 React + Antd。
+- 🎨 基于 Vue + bootstrap。
 
 ## Install
 
