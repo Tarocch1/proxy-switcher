@@ -18,31 +18,31 @@
             {{ $filters.i18n('proxy_mode') }}
           </label>
           <select id="mode" v-model="form.mode" class="form-select">
-            <option value="fixed_servers">
+            <option :value="ProxyMode.fixed_servers">
               {{ $filters.i18n('manual') }}
             </option>
-            <option value="pac_script">
+            <option :value="ProxyMode.pac_script">
               {{ $filters.i18n('auto') }}
             </option>
-            <option value="direct">
+            <option :value="ProxyMode.direct">
               {{ $filters.i18n('direct') }}
             </option>
           </select>
-          <div v-if="form.mode === 'direct'" class="form-text">
+          <div v-if="form.mode === ProxyMode.direct" class="form-text">
             {{ $filters.i18n('direct_extra') }}
           </div>
         </div>
 
-        <div v-if="form.mode === 'fixed_servers'">
+        <div v-if="form.mode === ProxyMode.fixed_servers">
           <div class="mb-3">
             <label for="scheme" class="form-label">
               {{ $filters.i18n('proxy_scheme') }}
             </label>
             <select id="scheme" v-model="form.scheme" class="form-select">
-              <option value="http">HTTP</option>
-              <option value="https">HTTPS</option>
-              <option value="socks4">Socks4</option>
-              <option value="socks5">Socks5</option>
+              <option :value="ProxyScheme.http">HTTP</option>
+              <option :value="ProxyScheme.https">HTTPS</option>
+              <option :value="ProxyScheme.socks4">Socks4</option>
+              <option :value="ProxyScheme.socks5">Socks5</option>
             </select>
           </div>
           <div class="mb-3">
@@ -73,7 +73,7 @@
             />
           </div>
           <div
-            v-if="['http', 'https'].includes(form.scheme)"
+            v-if="[ProxyScheme.http, ProxyScheme.https].includes(form.scheme)"
             class="row mb-3 gx-3"
           >
             <div class="col">
@@ -123,7 +123,7 @@
           </div>
         </div>
 
-        <div v-else-if="form.mode === 'pac_script'">
+        <div v-else-if="form.mode === ProxyMode.pac_script">
           <div class="mb-3">
             <label for="pacUrl" class="form-label">
               {{ $filters.i18n('pac_file') }}
@@ -166,7 +166,7 @@
         </div>
       </form>
 
-      <div ref="modalRef" class="modal fade">
+      <div ref="modalElement" class="modal fade">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-body">
@@ -195,7 +195,7 @@
 import { defineProps, ref, computed, watch, onMounted } from 'vue'
 import { Modal } from 'bootstrap'
 import { storage } from '@/utils/storage'
-import { Proxy, ProxyFormData } from '@/utils/proxy'
+import { Proxy, ProxyFormData, ProxyMode, ProxyScheme } from '@/utils/proxy'
 
 const props = defineProps<{
   id?: string
@@ -209,11 +209,11 @@ const invalid = computed<Record<keyof ProxyFormData, boolean>>(() => {
   if (!dirty.value) return {} as Record<keyof ProxyFormData, boolean>
   const error = {} as Record<keyof ProxyFormData, boolean>
   if (!form.value.name) error.name = true
-  if (form.value.mode === 'fixed_servers') {
+  if (form.value.mode === ProxyMode.fixed_servers) {
     if (!form.value.host) error.host = true
     if (!form.value.port) error.port = true
   }
-  if (form.value.mode === 'pac_script') {
+  if (form.value.mode === ProxyMode.pac_script) {
     if (!form.value.pacUrl && !form.value.pacScript) {
       error.pacUrl = true
       error.pacScript = true

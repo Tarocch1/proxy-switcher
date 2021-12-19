@@ -82,5 +82,11 @@
   },
   "success": {
     "message": "Success"
+  },
+  "import": {
+    "message": "Import"
+  },
+  "export": {
+    "message": "Export"
   }
 }

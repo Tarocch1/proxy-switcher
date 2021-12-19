@@ -58,6 +58,15 @@ class Storage {
     this.proxy = proxy
   }
 
+  importProxy(data: unknown) {
+    if (!Array.isArray(data)) return
+    if (!data.every(Proxy.valid)) return
+    const ids = data.map((p) => p.id)
+    if (new Set(ids).size !== ids.length) return
+
+    this.proxy = data
+  }
+
   deleteProxy(id: string) {
     chrome.storage.sync.set({
       proxy: this.proxy.filter((proxy) => proxy.id !== id),

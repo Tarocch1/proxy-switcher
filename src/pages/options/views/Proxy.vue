@@ -1,7 +1,16 @@
 <template>
   <div class="row p-4">
     <div class="col-auto">
+      <Export />
       <div class="list-group">
+        <button
+          v-if="proxy.length === 0"
+          type="button"
+          class="list-group-item list-group-item-action text-center"
+          disabled
+        >
+          {{ $filters.i18n('no_proxy') }}
+        </button>
         <button
           v-for="p in proxy"
           :key="p.id"
@@ -35,6 +44,7 @@ import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { ProxyMode } from '@/utils/proxy'
 import { storage } from '@/utils/storage'
 import { eventEmitter, STORAGE_CHANGED } from '@/utils/event'
+import Export from '../Components/Export.vue'
 import ProxyForm from '../Components/ProxyForm.vue'
 
 const ADD = 'add'
@@ -42,9 +52,9 @@ const selectedKey = ref(ADD)
 const proxy = ref(storage.proxy)
 
 const iconMap: Record<ProxyMode, string> = {
-  fixed_servers: 'bi-funnel',
-  pac_script: 'bi-signpost-2',
-  direct: 'bi-plug',
+  [ProxyMode.fixed_servers]: 'bi-funnel',
+  [ProxyMode.pac_script]: 'bi-signpost-2',
+  [ProxyMode.direct]: 'bi-plug',
 }
 
 const storageChangeHandler = function () {

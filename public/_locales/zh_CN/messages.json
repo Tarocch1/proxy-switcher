@@ -82,5 +82,11 @@
   },
   "success": {
     "message": "成功"
+  },
+  "import": {
+    "message": "导入"
+  },
+  "export": {
+    "message": "导出"
   }
 }

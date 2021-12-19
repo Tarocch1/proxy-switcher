@@ -1,7 +1,18 @@
 import { v4 as uuidV4 } from 'uuid'
 
-export type ProxyMode = 'direct' | 'pac_script' | 'fixed_servers'
-export type ProxyScheme = 'http' | 'https' | 'quic' | 'socks4' | 'socks5'
+export enum ProxyMode {
+  direct = 'direct',
+  pac_script = 'pac_script',
+  fixed_servers = 'fixed_servers',
+}
+
+export enum ProxyScheme {
+  http = 'http',
+  https = 'https',
+  quic = 'quic',
+  socks4 = 'socks4',
+  socks5 = 'socks5',
+}
 
 export type ProxyFormData = {
   id: string
@@ -28,8 +39,8 @@ export class Proxy {
     return {
       id: uuidV4(),
       name: '',
-      mode: 'fixed_servers',
-      scheme: 'http',
+      mode: ProxyMode.fixed_servers,
+      scheme: ProxyScheme.http,
       host: '',
       port: '',
       username: '',
@@ -40,14 +51,35 @@ export class Proxy {
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  static valid(data: any): data is ProxyFormData {
+    if (!(Object.prototype.toString.call(data) === '[object Object]')) {
+      return false
+    }
+    if (typeof data.id !== 'string') return false
+    if (typeof data.name !== 'string') return false
+    if (!Object.values(ProxyMode).includes(data.mode)) return false
+    if (!Object.values(ProxyScheme).includes(data.scheme)) return false
+    if (typeof data.host !== 'string') return false
+    if (typeof data.port !== 'number' && data.port !== '') return false
+    if (typeof data.username !== 'string') return false
+    if (typeof data.password !== 'string') return false
+    if (typeof data.bypassList !== 'string') return false
+    if (typeof data.pacUrl !== 'string') return false
+    if (typeof data.pacScript !== 'string') return false
+    return true
+  }
+
   private format(proxyFormData: ProxyFormData): ProxyFormData {
     let keys: Array<keyof ProxyFormData> = []
 
-    if (proxyFormData.mode === 'direct') {
+    if (proxyFormData.mode === ProxyMode.direct) {
       keys = ['id', 'name', 'mode']
-    } else if (proxyFormData.mode === 'pac_script') {
+    } else if (proxyFormData.mode === ProxyMode.pac_script) {
       keys = ['id', 'name', 'mode', 'pacScript', 'pacUrl']
-    } else if (['http', 'https'].includes(proxyFormData.scheme)) {
+    } else if (
+      [ProxyScheme.http, ProxyScheme.https].includes(proxyFormData.scheme)
+    ) {
       keys = [
         'id',
         'name',
