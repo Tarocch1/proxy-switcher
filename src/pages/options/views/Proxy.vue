@@ -4,6 +4,7 @@
       <div class="list-group">
         <button
           v-for="p in proxy"
+          :key="p.id"
           type="button"
           class="list-group-item list-group-item-action"
           :class="{ active: selectedKey === p.id }"

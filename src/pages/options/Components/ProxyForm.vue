@@ -1,23 +1,23 @@
 <template>
   <div class="row justify-content-center">
     <div class="col mw-600">
-      <form @submit.passive.stop="submit" novalidate>
+      <form novalidate @submit.passive.stop="submit">
         <div class="mb-3">
           <label for="name" class="form-label">
             {{ $filters.i18n('proxy_name') }}
           </label>
           <input
             id="name"
+            v-model="form.name"
             class="form-control"
             :class="{ 'is-invalid': invalid.name }"
-            v-model="form.name"
           />
         </div>
         <div class="mb-3">
           <label for="mode" class="form-label">
             {{ $filters.i18n('proxy_mode') }}
           </label>
-          <select id="mode" class="form-select" v-model="form.mode">
+          <select id="mode" v-model="form.mode" class="form-select">
             <option value="fixed_servers">
               {{ $filters.i18n('manual') }}
             </option>
@@ -38,7 +38,7 @@
             <label for="scheme" class="form-label">
               {{ $filters.i18n('proxy_scheme') }}
             </label>
-            <select id="scheme" class="form-select" v-model="form.scheme">
+            <select id="scheme" v-model="form.scheme" class="form-select">
               <option value="http">HTTP</option>
               <option value="https">HTTPS</option>
               <option value="socks4">Socks4</option>
@@ -51,9 +51,9 @@
             </label>
             <input
               id="host"
+              v-model="form.host"
               class="form-control"
               :class="{ 'is-invalid': invalid.host }"
-              v-model="form.host"
               placeholder="e.g. 127.0.0.1"
             />
           </div>
@@ -63,9 +63,9 @@
             </label>
             <input
               id="port"
+              v-model="form.port"
               class="form-control"
               :class="{ 'is-invalid': invalid.port }"
-              v-model="form.port"
               placeholder="e.g. 8080"
               type="number"
               min="1"
@@ -82,8 +82,8 @@
               </label>
               <input
                 id="username"
-                class="form-control"
                 v-model="form.username"
+                class="form-control"
               />
             </div>
             <div class="col">
@@ -92,8 +92,8 @@
               </label>
               <input
                 id="password"
-                class="form-control"
                 v-model="form.password"
+                class="form-control"
                 type="password"
               />
             </div>
@@ -104,8 +104,8 @@
             </label>
             <textarea
               id="bypassList"
-              class="form-control"
               v-model="form.bypassList"
+              class="form-control"
               placeholder="e.g. <local>"
             />
             <div class="form-text">
@@ -130,9 +130,9 @@
             </label>
             <input
               id="pacUrl"
+              v-model="form.pacUrl"
               class="form-control"
               :class="{ 'is-invalid': invalid.pacUrl }"
-              v-model="form.pacUrl"
               placeholder="e.g. http://127.0.0.1:1080/pac"
             />
           </div>
@@ -142,9 +142,9 @@
             </label>
             <textarea
               id="pacScript"
+              v-model="form.pacScript"
               class="form-control"
               :class="{ 'is-invalid': invalid.pacScript }"
-              v-model="form.pacScript"
             />
             <div class="form-text">
               <span>{{ $filters.i18n('pac_script_extra') }}</span>
@@ -202,7 +202,7 @@ const props = defineProps<{
 }>()
 const form = ref<ProxyFormData>(Proxy.default())
 const dirty = ref<boolean>(false)
-const modalRef = ref<HTMLDivElement>()
+const modalElement = ref<HTMLDivElement>()
 const modal = ref<Modal>()
 
 const invalid = computed<Record<keyof ProxyFormData, boolean>>(() => {
@@ -226,9 +226,9 @@ watch(
   () => props.id,
   (id) => {
     dirty.value = false
-    form.value = id
-      ? { ...storage.proxy.find((proxy) => proxy.id === id)! }
-      : Proxy.default()
+    form.value = {
+      ...(storage.proxy.find((proxy) => proxy.id === id) || Proxy.default()),
+    }
   }
 )
 
@@ -243,12 +243,12 @@ const submit = function () {
 }
 
 const remove = function () {
-  storage.deleteProxy(props.id!)
+  props.id && storage.deleteProxy(props.id)
   modal.value?.hide()
 }
 
 onMounted(function () {
-  modal.value = new Modal(modalRef.value!)
+  modalElement.value && (modal.value = new Modal(modalElement.value))
 })
 </script>
 

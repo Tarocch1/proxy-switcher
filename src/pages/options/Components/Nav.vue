@@ -6,7 +6,7 @@
         <span class="ms-3">Proxy Switcher</span>
       </div>
       <ul class="navbar-nav me-auto">
-        <li v-for="r in router.getRoutes()" class="nav-item">
+        <li v-for="r in router.getRoutes()" :key="r.name" class="nav-item">
           <router-link
             class="nav-link"
             :class="{ active: route.name === r.name }"
