@@ -166,27 +166,29 @@
         </div>
       </form>
 
-      <div ref="modalElement" class="modal fade">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-body">
-              {{ $filters.i18n('delete_confirm') }}
-            </div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                @click="modal?.hide()"
-              >
-                {{ $filters.i18n('cancel') }}
-              </button>
-              <button type="button" class="btn btn-primary" @click="remove">
-                {{ $filters.i18n('confirm') }}
-              </button>
+      <teleport to="body">
+        <div ref="modalElement" class="modal fade">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-body">
+                {{ $filters.i18n('delete_confirm') }}
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  @click="modal?.hide()"
+                >
+                  {{ $filters.i18n('cancel') }}
+                </button>
+                <button type="button" class="btn btn-primary" @click="remove">
+                  {{ $filters.i18n('confirm') }}
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </teleport>
     </div>
   </div>
 </template>
