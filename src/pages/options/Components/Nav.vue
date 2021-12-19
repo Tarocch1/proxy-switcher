@@ -3,19 +3,18 @@
     <div class="container-fluid">
       <div class="navbar-brand">
         <img src="/icons/icon128.png" alt="logo" width="32" />
-        <span class="ms-3">Proxy Switcher</span>
       </div>
-      <ul class="navbar-nav me-auto">
-        <li v-for="r in router.getRoutes()" :key="r.name" class="nav-item">
+      <div class="row gx-2 me-auto">
+        <div v-for="r in router.getRoutes()" :key="r.name" class="col-auto">
           <router-link
-            class="nav-link"
+            class="btn btn-outline-danger"
             :class="{ active: route.name === r.name }"
             :to="r.path"
           >
             {{ $filters.i18n(r.name as string) }}
           </router-link>
-        </li>
-      </ul>
+        </div>
+      </div>
     </div>
   </nav>
 </template>
