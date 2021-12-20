@@ -28,6 +28,32 @@ export type ProxyFormData = {
   pacScript: string
 }
 
+export function proxyGetSync(details: chrome.types.ChromeSettingGetDetails) {
+  return new Promise<chrome.types.ChromeSettingGetResultDetails>((resolve) => {
+    chrome.proxy.settings.get(details, resolve)
+  })
+}
+
+export function proxySetSync(details: chrome.types.ChromeSettingSetDetails) {
+  return new Promise<void>((resolve) => {
+    chrome.proxy.settings.set(details, resolve)
+  })
+}
+
+export function proxyClearSync(
+  details: chrome.types.ChromeSettingClearDetails
+) {
+  return new Promise<void>((resolve) => {
+    chrome.proxy.settings.clear(details, resolve)
+  })
+}
+
+export async function controllableByThisExtension() {
+  const proxySetting = await proxyGetSync({})
+  console.log(proxySetting)
+  return proxySetting.levelOfControl.includes('this_extension')
+}
+
 export class Proxy {
   config: ProxyFormData
 

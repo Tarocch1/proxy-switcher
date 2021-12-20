@@ -71,6 +71,13 @@ class Storage {
     chrome.storage.sync.set({
       proxy: this.proxy.filter((proxy) => proxy.id !== id),
     })
+    if (this.current === id) {
+      this.current = ''
+    }
+  }
+
+  toggleProxy(id: string) {
+    this.current = this.current === id ? '' : id
   }
 }
 

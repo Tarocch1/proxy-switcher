@@ -1,6 +1,6 @@
 {
-  "controlled_by_other_extensions": {
-    "message": "其它插件控制了代理配置！"
+  "cannot_control_proxy": {
+    "message": "无法控制代理！"
   },
   "proxy": {
     "message": "代理"
@@ -88,5 +88,8 @@
   },
   "export": {
     "message": "导出"
+  },
+  "setting": {
+    "message": "设置"
   }
 }

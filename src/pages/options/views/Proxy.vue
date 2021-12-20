@@ -3,19 +3,14 @@
     <div class="col-auto">
       <Export />
       <div class="list-group">
-        <button
-          v-if="proxy.length === 0"
-          type="button"
-          class="list-group-item list-group-item-action text-center"
-          disabled
-        >
+        <li v-if="proxy.length === 0" class="list-group-item text-center">
           {{ $filters.i18n('no_proxy') }}
-        </button>
+        </li>
         <button
           v-for="p in proxy"
           :key="p.id"
           type="button"
-          class="list-group-item list-group-item-action"
+          class="list-group-item list-group-item-action text-truncate"
           :class="{ active: selectedKey === p.id }"
           @click="selectedKey = p.id"
         >

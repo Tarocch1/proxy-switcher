@@ -1,6 +1,6 @@
 {
-  "controlled_by_other_extensions": {
-    "message": "Proxy is controlled by other extensions!"
+  "cannot_control_proxy": {
+    "message": "Can not control proxy!"
   },
   "proxy": {
     "message": "Proxy"
@@ -88,5 +88,8 @@
   },
   "export": {
     "message": "Export"
+  },
+  "setting": {
+    "message": "Setting"
   }
 }
