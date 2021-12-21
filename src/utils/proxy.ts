@@ -50,7 +50,6 @@ export function proxyClearSync(
 
 export async function controllableByThisExtension() {
   const proxySetting = await proxyGetSync({})
-  console.log(proxySetting)
   return proxySetting.levelOfControl.includes('this_extension')
 }
 
@@ -129,5 +128,53 @@ export class Proxy {
         )
       ),
     }
+  }
+
+  toProxyConfig(): chrome.proxy.ProxyConfig {
+    let proxyConfig: chrome.proxy.ProxyConfig = {
+      mode: 'system',
+    }
+    switch (this.config.mode) {
+      case 'direct':
+        proxyConfig = {
+          mode: 'direct',
+        }
+        break
+      case 'fixed_servers': {
+        const bypassList = this.config.bypassList
+          .replace(/\r/g, '\n')
+          .replace(/\n+/g, '\n')
+        proxyConfig = {
+          mode: 'fixed_servers',
+          rules: {
+            singleProxy: {
+              scheme: this.config.scheme,
+              host: this.config.host,
+              port: this.config.port as number,
+            },
+            bypassList: bypassList.split('\n'),
+          },
+        }
+        break
+      }
+      case 'pac_script':
+        proxyConfig = {
+          mode: 'pac_script',
+          pacScript: {
+            ...(this.config.pacUrl
+              ? {
+                  url: this.config.pacUrl,
+                }
+              : {
+                  data: this.config.pacScript,
+                }),
+            mandatory: false,
+          },
+        }
+        break
+      default:
+        break
+    }
+    return proxyConfig
   }
 }

@@ -1,7 +1,7 @@
 import { Proxy, ProxyFormData } from './proxy'
 import { eventEmitter, STORAGE_CHANGED } from './event'
 
-type Storages = {
+export type Storages = {
   proxy: ProxyFormData[]
   current: string
 }

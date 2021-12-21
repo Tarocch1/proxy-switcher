@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "start": "vite",
-    "build": "vue-tsc --noEmit && vite build",
+    "build": "npm run build:vite && npm run build:background",
+    "build:vite": "vue-tsc --noEmit && vite build",
+    "build:background": "esbuild src/background.ts --bundle --minify --format=esm --outfile=dist/background.js",
     "debug": "vite build -w",
     "lint": "eslint --fix 'src/**/*.ts' 'src/**/*.vue'"
   },
@@ -41,6 +43,7 @@
     "@typescript-eslint/eslint-plugin": "^5.7.0",
     "@typescript-eslint/parser": "^5.7.0",
     "@vitejs/plugin-vue": "^2.0.1",
+    "esbuild": "^0.14.6",
     "eslint": "^8.5.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-import-resolver-alias": "^1.1.2",

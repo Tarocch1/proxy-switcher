@@ -21,15 +21,10 @@
         <span class="ms-2">{{ p.name }}</span>
       </a>
     </ul>
-    <div class="p-2 text-center">
-      <button
-        type="button"
-        class="btn btn-outline-secondary btn-sm"
-        @click="toSetting"
-      >
-        <i class="bi bi-gear"></i>
-        <span class="ms-2">{{ $filters.i18n('setting') }}</span>
-      </button>
+    <div class="p-2 text-end">
+      <a href="#" class="text-decoration-none" @click="toSetting">
+        {{ $filters.i18n('setting') }}
+      </a>
     </div>
   </div>
 </template>
