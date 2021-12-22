@@ -1,6 +1,9 @@
 {
-  "controlled_by_other_extensions": {
-    "message": "其它插件控制了代理配置！"
+  "cannot_control_proxy": {
+    "message": "无法控制代理！"
+  },
+  "proxy": {
+    "message": "代理"
   },
   "add": {
     "message": "添加"
@@ -76,5 +79,17 @@
   },
   "save": {
     "message": "保存"
+  },
+  "success": {
+    "message": "成功"
+  },
+  "import": {
+    "message": "导入"
+  },
+  "export": {
+    "message": "导出"
+  },
+  "setting": {
+    "message": "设置"
   }
 }

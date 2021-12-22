@@ -1,6 +1,9 @@
 {
-  "controlled_by_other_extensions": {
-    "message": "Proxy is controlled by other extensions!"
+  "cannot_control_proxy": {
+    "message": "Can not control proxy!"
+  },
+  "proxy": {
+    "message": "Proxy"
   },
   "add": {
     "message": "Add"
@@ -76,5 +79,17 @@
   },
   "save": {
     "message": "Save"
+  },
+  "success": {
+    "message": "Success"
+  },
+  "import": {
+    "message": "Import"
+  },
+  "export": {
+    "message": "Export"
+  },
+  "setting": {
+    "message": "Setting"
   }
 }
