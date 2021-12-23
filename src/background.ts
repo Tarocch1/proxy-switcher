@@ -3,6 +3,21 @@ import { Proxy, proxySetSync, proxyClearSync } from '@/utils/proxy'
 
 const keys = ['proxy', 'current']
 
+function setBadge(color: string) {
+  chrome.action.setBadgeBackgroundColor({
+    color: color,
+  })
+  chrome.action.setBadgeText({
+    text: ' ',
+  })
+}
+
+function clearBadge() {
+  chrome.action.setBadgeText({
+    text: '',
+  })
+}
+
 chrome.storage.onChanged.addListener(async function () {
   const { current, proxy } = (await chrome.storage.sync.get(keys)) as Storages
   const proxyFormData = proxy.find((p) => p.id === current)
@@ -12,9 +27,11 @@ chrome.storage.onChanged.addListener(async function () {
       scope: 'regular',
       value: new Proxy(proxyFormData).toProxyConfig(),
     })
+    setBadge(proxyFormData.color)
   } else {
     proxyClearSync({
       scope: 'regular',
     })
+    clearBadge()
   }
 })

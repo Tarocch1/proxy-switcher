@@ -1,17 +1,28 @@
 <template>
   <div class="row justify-content-center">
     <div class="col mw-600">
-      <form novalidate @submit.passive.stop="submit">
-        <div class="mb-3">
-          <label for="name" class="form-label">
-            {{ $filters.i18n('proxy_name') }}
-          </label>
-          <input
-            id="name"
-            v-model="form.name"
-            class="form-control"
-            :class="{ 'is-invalid': invalid.name }"
-          />
+      <form novalidate @submit.prevent.stop="submit">
+        <div class="row mb-3 gx-3">
+          <div class="col">
+            <label for="name" class="form-label">
+              {{ $filters.i18n('proxy_name') }}
+            </label>
+            <input
+              id="name"
+              v-model="form.name"
+              class="form-control"
+              :class="{ 'is-invalid': invalid.name }"
+            />
+          </div>
+          <div class="col-auto">
+            <label for="color" class="form-label">&nbsp;</label>
+            <input
+              id="color"
+              v-model="form.color"
+              class="form-control form-control-color"
+              type="color"
+            />
+          </div>
         </div>
         <div class="mb-3">
           <label for="mode" class="form-label">

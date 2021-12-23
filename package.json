@@ -1,13 +1,16 @@
 {
   "name": "proxy-switcher",
-  "version": "0.12.0",
+  "version": "0.13.0",
   "private": true,
   "scripts": {
     "start": "vite",
     "build": "npm run build:vite && npm run build:background",
     "build:vite": "vue-tsc --noEmit && vite build",
     "build:background": "esbuild src/background.ts --bundle --minify --format=esm --outfile=dist/background.js",
-    "debug": "vite build -w",
+    "predebug": "rm -rf dist",
+    "debug": "npm-run-all -p debug:vite debug:background",
+    "debug:vite": "vite build -w --emptyOutDir=false",
+    "debug:background": "esbuild src/background.ts --bundle --watch --format=esm --outfile=dist/background.js",
     "lint": "eslint --fix 'src/**/*.ts' 'src/**/*.vue'"
   },
   "husky": {
@@ -53,6 +56,7 @@
     "eslint-plugin-vue": "^8.2.0",
     "husky": "^4.3.8",
     "lint-staged": "^11.1.2",
+    "npm-run-all": "^4.1.5",
     "prettier": "^2.5.1",
     "typescript": "^4.5.4",
     "vite": "^2.7.6",

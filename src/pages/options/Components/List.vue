@@ -7,7 +7,7 @@
       v-for="(p, index) in props.proxy"
       :key="p.id"
       type="button"
-      class="list-group-item list-group-item-action text-truncate"
+      class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
       :class="{
         active: props.selectedKey === p.id,
         dragover: currentDragOver === index && currentDragging !== index,
@@ -20,8 +20,14 @@
       @dragend="dragend"
       @drop="drop($event, index)"
     >
-      <i class="bi" :class="iconMap[p.mode]"></i>
-      <span class="ms-2">{{ p.name }}</span>
+      <span class="text-truncate">
+        <i class="bi" :class="iconMap[p.mode]"></i>
+        <span class="ms-2">{{ p.name }}</span>
+      </span>
+      <span
+        class="ms-2 p-2 rounded-circle"
+        :style="{ backgroundColor: p.color }"
+      ></span>
     </button>
     <button
       type="button"

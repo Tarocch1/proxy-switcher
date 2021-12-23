@@ -36,3 +36,9 @@ onBeforeUnmount(function () {
   eventEmitter.removeListener(STORAGE_CHANGED, storageChangeHandler)
 })
 </script>
+
+<style>
+body {
+  overflow-x: hidden;
+}
+</style>

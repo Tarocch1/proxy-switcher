@@ -17,6 +17,7 @@ export enum ProxyScheme {
 export type ProxyFormData = {
   id: string
   name: string
+  color: string
   mode: ProxyMode
   scheme: ProxyScheme
   host: string
@@ -64,6 +65,7 @@ export class Proxy {
     return {
       id: uuidV4(),
       name: '',
+      color: '#dc3545',
       mode: ProxyMode.fixed_servers,
       scheme: ProxyScheme.http,
       host: '',
@@ -83,6 +85,7 @@ export class Proxy {
     }
     if (typeof data.id !== 'string') return false
     if (typeof data.name !== 'string') return false
+    if (typeof data.color !== 'string') return false
     if (!Object.values(ProxyMode).includes(data.mode)) return false
     if (!Object.values(ProxyScheme).includes(data.scheme)) return false
     if (typeof data.host !== 'string') return false
@@ -99,15 +102,16 @@ export class Proxy {
     let keys: Array<keyof ProxyFormData> = []
 
     if (proxyFormData.mode === ProxyMode.direct) {
-      keys = ['id', 'name', 'mode']
+      keys = ['id', 'name', 'color', 'mode']
     } else if (proxyFormData.mode === ProxyMode.pac_script) {
-      keys = ['id', 'name', 'mode', 'pacScript', 'pacUrl']
+      keys = ['id', 'name', 'color', 'mode', 'pacScript', 'pacUrl']
     } else if (
       [ProxyScheme.http, ProxyScheme.https].includes(proxyFormData.scheme)
     ) {
       keys = [
         'id',
         'name',
+        'color',
         'mode',
         'scheme',
         'host',
@@ -117,7 +121,16 @@ export class Proxy {
         'bypassList',
       ]
     } else {
-      keys = ['id', 'name', 'mode', 'scheme', 'host', 'port', 'bypassList']
+      keys = [
+        'id',
+        'name',
+        'color',
+        'mode',
+        'scheme',
+        'host',
+        'port',
+        'bypassList',
+      ]
     }
 
     return {

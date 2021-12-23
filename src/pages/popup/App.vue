@@ -10,16 +10,23 @@
       <li v-if="proxy.length === 0" class="list-group-item text-center">
         {{ $filters.i18n('no_proxy') }}
       </li>
-      <a
+      <button
         v-for="p in proxy"
         :key="p.id"
-        class="list-group-item list-group-item-action text-truncate"
+        type="button"
+        class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
         :class="{ active: current === p.id, disabled: !enable }"
         @click="toggleProxy(p.id)"
       >
-        <i class="bi" :class="iconMap[p.mode]"></i>
-        <span class="ms-2">{{ p.name }}</span>
-      </a>
+        <span class="text-truncate">
+          <i class="bi" :class="iconMap[p.mode]"></i>
+          <span class="ms-2">{{ p.name }}</span>
+        </span>
+        <span
+          class="ms-2 p-2 rounded-circle"
+          :style="{ backgroundColor: p.color }"
+        ></span>
+      </button>
     </ul>
     <div class="p-2 text-end">
       <a href="#" class="text-decoration-none" @click="toSetting">
