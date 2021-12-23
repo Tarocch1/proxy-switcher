@@ -58,6 +58,7 @@ class Storage {
     this.proxy = proxy
   }
 
+  // 导入配置
   importProxy(data: unknown) {
     if (!Array.isArray(data)) return
     if (!data.every(Proxy.valid)) return
@@ -78,6 +79,13 @@ class Storage {
 
   toggleProxy(id: string) {
     this.current = this.current === id ? '' : id
+  }
+
+  // 拖拽排序
+  sortProxy(from: number, to: number) {
+    const proxy = [...this.proxy]
+    ;[proxy[from], proxy[to]] = [proxy[to], proxy[from]]
+    this.proxy = proxy
   }
 }
 
