@@ -38,4 +38,4 @@ async function setProxy() {
 
 chrome.storage.onChanged.addListener(setProxy)
 
-setProxy()
+chrome.runtime.onStartup.addListener(setProxy)
