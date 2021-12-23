@@ -18,7 +18,7 @@ function clearBadge() {
   })
 }
 
-chrome.storage.onChanged.addListener(async function () {
+async function setProxy() {
   const { current, proxy } = (await chrome.storage.sync.get(keys)) as Storages
   const proxyFormData = proxy.find((p) => p.id === current)
 
@@ -34,4 +34,8 @@ chrome.storage.onChanged.addListener(async function () {
     })
     clearBadge()
   }
-})
+}
+
+chrome.storage.onChanged.addListener(setProxy)
+
+setProxy()

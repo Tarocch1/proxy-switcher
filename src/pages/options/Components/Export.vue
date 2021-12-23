@@ -29,6 +29,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { saveAs } from 'file-saver'
 import { storage } from '@/utils/storage'
 
 const inputElement = ref<HTMLInputElement>()
@@ -50,9 +51,9 @@ const importHandler = function () {
 }
 
 const exportHandler = function () {
-  const link = document.createElement('a')
-  link.download = 'proxy-switcher.json'
-  link.href = `data:text/plain,${JSON.stringify(storage.proxy)}`
-  link.click()
+  const blob = new Blob([JSON.stringify(storage.proxy)], {
+    type: 'text/plain;charset=utf-8',
+  })
+  saveAs(blob, 'proxy-switcher.json')
 }
 </script>
