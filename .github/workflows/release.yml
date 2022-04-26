@@ -28,13 +28,6 @@ jobs:
         run: |
           mv dist ProxySwitcher
           zip -r ProxySwitcher.zip ProxySwitcher
-      - id: ossutil
-        name: ossutil
-        uses: Tarocch1/actions/ossutil@main
-        with:
-          keyid: ${{ secrets.ALIYUN_KEYID }}
-          secret: ${{ secrets.ALIYUN_SECRET }}
-          args: cp ProxySwitcher.zip oss://tarocch1-oss-hk-disk/backup/proxy-switcher/ProxySwitcher.zip -f
       - id: create_release
         name: Create Release
         uses: actions/create-release@v1.1.4
